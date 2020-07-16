@@ -16,7 +16,6 @@ jobs:
           GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
         run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
 
-
       # https://github.com/actions/cache/blob/master/examples.md#go---modules
       - name: Cache Go Modules
         id: cache
