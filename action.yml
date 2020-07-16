@@ -9,7 +9,7 @@ jobs:
       using: 'docker'
       image: 'Dockerfile'
     steps:
-      - name: Download NightfallDLP repo (and action since it's currently in a private repo)
+      - name: Download NightfallDLP Action repo (NB - currently private)
         shell: bash
         env:
           GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
