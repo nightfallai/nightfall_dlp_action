@@ -1,0 +1,114 @@
+name: nightfalldlp
+on: [pull_request]
+env:
+    nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+    nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+    nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
+    JOSH_TEST: "HEY THERE JOSH"
+    anotha: ${{ secrets.GIT_USER }}
+jobs:
+  nightfalldlp-pr:
+    name: nightfalldlp on Pull Request
+    runs-on: ubuntu-latest
+#    container:
+#      env:
+#        GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+#        GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+#        NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        DOCKER_TEST: THIS_IS_A_DOCKER_TEST
+    # env:
+    #     GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+    #     GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+    #     NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    env:
+        nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+        nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+        nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
+        just_a_test: SOME_TESTY_MAN
+        GIT_USER: ${{ secrets.GIT_USER }}
+        GIT_PASS: ${{ secrets.GIT_PASS }}
+    steps:
+      - name: Download Nightfall Scanner tool Repo1
+        shell: bash
+        run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git"
+
+
+
+#        run: echo "${{ secrets.GIT_USER }}" && echo "${{ inputs.SOMETHING }}"
+#        with:
+#          - hello: SOMETHING
+#        run: echo $some-test && echo ${{ inputs.some-test }}
+#        run: echo ${{ env.GIT_USER }} && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
+#        run: echo ${{ env.GIT_USER }} && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
+#        run: echo ${{ env.GIT_USER }} && echo $GIT_USER && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
+#        with:
+#          some-test: ${{ env.GIT_USER }}
+
+#      - name: Download Nightfall Scanner tool Repo
+#        shell: bash
+#        run: git clone https://${{ GIT_USER }}:${{ GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git
+#        run: echo ${{ env.anotha }} && echo ${{ env.just_a_test }} && echo ${{ env.JOSH_TEST }}
+
+      # - name: Install go
+      #   uses: actions/setup-go@v1
+      #   with:
+      #     go-version: 1.13
+
+      # - name: Add $GOPATH/bin
+      #   run: |
+      #     echo ::add-path::$(go env GOPATH)/bin
+
+      # - name: Download repo (and action since it's currently in a private repo)
+      #   uses: actions/checkout@v2
+
+      # https://github.com/actions/cache/blob/master/examples.md#go---modules
+      - name: Cache Go Modules
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+    #   - name: Update git url (since has private dependency)
+    #     shell: bash
+        # env:
+        #   GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+        #   GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+        # run: |
+        #   git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
+
+#      - name: Download NightfallDLP Action Repo
+#        shell: bash
+        # env:
+        #   GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+        #   GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+#        run: git clone https://$nf_git_user:$nf_git_pass@github.com/watchtowerai/nightfall_dlp.git
+
+#      - name: checkout nightfall_dlp project
+#        shell: bash
+#        run: ls && cd nightfall_dlp
+
+      - name: Download Go Modules
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: go mod download
+
+      - name: Setup nightfalldlp
+        run: |
+          go install ./nightfall_dlp/cmd/nightfalldlp
+#          go install ./cmd/nightfalldlp
+
+      - name: Run nightfalldlp (github-pr-check)
+         continue-on-error: true
+         env:
+           NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         run: |
+           nightfalldlp
+#      - name: nightfallDLP action step
+#        uses: nightfallai/nightfall_dlp@test
+#        with:
+#            nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+#            nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+#            nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
+#            JOSH_TEST: ${{ env.JOSH_TEST }}
