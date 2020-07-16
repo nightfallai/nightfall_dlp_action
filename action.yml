@@ -1,0 +1,56 @@
+name: nightfalldlp
+description: check PR's for sensitive information
+on: [pull_request]
+
+jobs:
+  nightfalldlp-pr:
+    name: nightfalldlp on Pull Request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install go
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.13
+
+      - name: Add $GOPATH/bin
+        run: |
+          echo ::add-path::$(go env GOPATH)/bin
+
+      - name: Download repo (and action since it's currently in a private repo)
+        uses: actions/checkout@v2
+
+      # https://github.com/actions/cache/blob/master/examples.md#go---modules
+      - name: Cache Go Modules
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Update git url (since has private dependency)
+        shell: bash
+        env:
+          GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+          GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+        run: |
+          git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
+
+      - name: Download Go Modules
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: go mod download
+
+      - name: Download NightfallDLP library
+        run: git clone git@github.com:watchtowerai/nightfall_dlp.git
+
+      - name: Setup nightfalldlp
+        run: |
+          go install ./cmd/nightfalldlp
+
+      - name: Run nightfalldlp (github-pr-check)
+        continue-on-error: true
+        env:
+          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          nightfalldlp
