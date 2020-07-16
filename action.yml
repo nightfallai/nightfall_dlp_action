@@ -5,7 +5,9 @@ on: [pull_request]
 jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
-    runs-on: ubuntu-latest
+    runs: 
+      using: 'docker'
+      image: 'Dockerfile'
     steps:
       - name: Download NightfallDLP repo (and action since it's currently in a private repo)
         shell: bash
