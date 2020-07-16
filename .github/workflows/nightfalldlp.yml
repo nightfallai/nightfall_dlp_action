@@ -51,4 +51,4 @@ jobs:
       #   run: |
       #     nightfalldlp
       - name: nightfallDLP action step
-        uses: nightfallai/nightfall_dlp@62965a02938c817f3bedcd25cd3c30e2f53425e2
+        uses: nightfallai/nightfall_dlp
