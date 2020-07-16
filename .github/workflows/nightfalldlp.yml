@@ -51,4 +51,4 @@ jobs:
       #   run: |
       #     nightfalldlp
       - name: nightfallDLP action step
-        uses: nightfallai/nightfall_dlp
+        uses: nightfallai/nightfall_dlp@latest
