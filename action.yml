@@ -4,9 +4,6 @@ description: check PR's for sensitive information
 jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
-    env:
-      NIGHTFALL_GITHUB_USER
-      NIGHTFALL_GITHUB_PASS
     runs: 
       using: 'docker'
       image: 'Dockerfile'
