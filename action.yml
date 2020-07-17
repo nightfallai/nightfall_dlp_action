@@ -5,16 +5,18 @@ jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
     inputs:
-      GIT_USER:
+      git_user:
+        description: git user for stuff
         required: true
-      GIT_PASS:
+      git_pass:
+        description: git pass for stuff
         required: true
     runs: 
       using: 'docker'
       image: 'Dockerfile'
       args:
-        - ${{ inputs.GIT_USER }}
-        - ${{ inputs.GIT_PASS }}
+        - ${{ inputs.git_user }}
+        - ${{ inputs.git_pass }}
 
     steps:
       - name: Download NightfallDLP Action repo (NB - currently private)
