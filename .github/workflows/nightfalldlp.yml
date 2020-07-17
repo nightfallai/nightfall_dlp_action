@@ -1,8 +1,8 @@
 name: nightfalldlp
 on: [pull_request]
 env:
-    git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-    git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+    nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+    nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
     nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
     JOSH_TEST: "HEY THERE JOSH"
 jobs:
@@ -14,8 +14,8 @@ jobs:
     #     GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
     #     NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     env:
-        git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-        git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+        nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+        nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
         nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
     steps:
       # - name: Install go
@@ -40,14 +40,21 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: Update git url (since has private dependency)
+    #   - name: Update git url (since has private dependency)
+    #     shell: bash
+        # env:
+        #   GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+        #   GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+        # run: |
+        #   git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
+
+      - name: Download NightfallDLP Action Repo
         shell: bash
         # env:
         #   GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
         #   GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-        run: |
-          git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
-
+        run: git clone https://$nf_git_user:$nf_git_pass@github.com/watchtowerai/nightfall_dlp.git
+      
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
         run: go mod download
@@ -65,7 +72,7 @@ jobs:
       - name: nightfallDLP action step
         uses: nightfallai/nightfall_dlp@test-action
         with:
-            git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-            git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+            nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+            nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
             nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
             JOSH_TEST: ${{ env.JOSH_TEST }}
