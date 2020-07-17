@@ -32,24 +32,24 @@ jobs:
         GIT_PASS: ${{ inputs.git_pass }}
         NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
-    steps:
-      - name: Download NightfallDLP Action repo (NB - currently private)
-        shell: bash
-        with:
-          GIT_USER: ${{ env.NIGHTFALL_GITHUB_USER }}
-          GIT_PASS: ${{ env.NIGHTFALL_GITHUB_PASS }}
-        run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
+    # steps:
+    #   - name: Download NightfallDLP Action repo (NB - currently private)
+    #     shell: bash
+    #     with:
+    #       GIT_USER: ${{ env.NIGHTFALL_GITHUB_USER }}
+    #       GIT_PASS: ${{ env.NIGHTFALL_GITHUB_PASS }}
+    #     run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
 
-      - name: Download Go Modules
-        run: go mod download
+    #   - name: Download Go Modules
+    #     run: go mod download
 
-      - name: Install nightfalldlp
-        run: |
-          go install ./nightfall_dlp/cmd/nightfalldlp
+    #   - name: Install nightfalldlp
+    #     run: |
+    #       go install ./nightfall_dlp/cmd/nightfalldlp
 
-      - name: Run nightfalldlp (github-pr-check)
-        continue-on-error: true
-        # env:
-        #   NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ env.GITHUB_TOKEN }}
-        run: |
-          nightfalldlp
+    #   - name: Run nightfalldlp (github-pr-check)
+    #     continue-on-error: true
+    #     # env:
+    #     #   NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ env.GITHUB_TOKEN }}
+    #     run: |
+    #       nightfalldlp
