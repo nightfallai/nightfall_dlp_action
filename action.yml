@@ -14,10 +14,14 @@ jobs:
     steps:
       - name: Download NightfallDLP Action repo (NB - currently private)
         shell: bash
-        env:
+        with:
           GIT_USER: ${{ env.NIGHTFALL_GITHUB_USER }}
           GIT_PASS: ${{ env.NIGHTFALL_GITHUB_PASS }}
         run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
+        # env:
+        #   GIT_USER: ${{ env.NIGHTFALL_GITHUB_USER }}
+        #   GIT_PASS: ${{ env.NIGHTFALL_GITHUB_PASS }}
+        # run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
 
       - name: Download Go Modules
         run: go mod download
