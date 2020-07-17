@@ -7,7 +7,10 @@ ARG GIT_USER
 ARG GIT_PASS
 ARG JOSH_TEST
 
-RUN echo $JOSH_TEST
+RUN echo "this is a giant test"
+RUN echo "$JOSH_TEST"
+
+RUN test -n "$JOSH_TEST"
 
 # no need to set WORKDIR as github actions already do that
 # WORKDIR /projects/
