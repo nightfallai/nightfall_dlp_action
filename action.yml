@@ -11,45 +11,56 @@ inputs:
     description: github token for stuff
     required: true
 
-jobs:
-  nightfalldlp-pr:
-    name: nightfalldlp on Pull Request
-    # inputs:
-    #   git_user:
-    #     description: git user for stuff
-    #     required: true
-    #   git_pass:
-    #     description: git pass for stuff
-    #     required: true
-    runs: 
-      using: 'docker'
-      image: 'Dockerfile'
-      # args:
-      #   - ${{ inputs.git_user }}
-      #   - ${{ inputs.git_pass }}
-      env:
-        GIT_USER: ${{ inputs.git_user }}
-        GIT_PASS: ${{ inputs.git_pass }}
-        NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+runs: 
+  using: 'docker'
+  image: 'Dockerfile'
+  # args:
+  #   - ${{ inputs.git_user }}
+  #   - ${{ inputs.git_pass }}
+  env:
+    GIT_USER: ${{ inputs.git_user }}
+    GIT_PASS: ${{ inputs.git_pass }}
+    NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
-    # steps:
-    #   - name: Download NightfallDLP Action repo (NB - currently private)
-    #     shell: bash
-    #     with:
-    #       GIT_USER: ${{ env.NIGHTFALL_GITHUB_USER }}
-    #       GIT_PASS: ${{ env.NIGHTFALL_GITHUB_PASS }}
-    #     run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
+# jobs:
+#   nightfalldlp-pr:
+#     name: nightfalldlp on Pull Request
+#     # inputs:
+#     #   git_user:
+#     #     description: git user for stuff
+#     #     required: true
+#     #   git_pass:
+#     #     description: git pass for stuff
+#     #     required: true
+#     runs: 
+#       using: 'docker'
+#       image: 'Dockerfile'
+#       # args:
+#       #   - ${{ inputs.git_user }}
+#       #   - ${{ inputs.git_pass }}
+#       env:
+#         GIT_USER: ${{ inputs.git_user }}
+#         GIT_PASS: ${{ inputs.git_pass }}
+#         NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
-    #   - name: Download Go Modules
-    #     run: go mod download
+#     steps:
+#       - name: Download NightfallDLP Action repo (NB - currently private)
+#         shell: bash
+#         with:
+#           GIT_USER: ${{ env.NIGHTFALL_GITHUB_USER }}
+#           GIT_PASS: ${{ env.NIGHTFALL_GITHUB_PASS }}
+#         run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
 
-    #   - name: Install nightfalldlp
-    #     run: |
-    #       go install ./nightfall_dlp/cmd/nightfalldlp
+#       - name: Download Go Modules
+#         run: go mod download
 
-    #   - name: Run nightfalldlp (github-pr-check)
-    #     continue-on-error: true
-    #     # env:
-    #     #   NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ env.GITHUB_TOKEN }}
-    #     run: |
-    #       nightfalldlp
+#       - name: Install nightfalldlp
+#         run: |
+#           go install ./nightfall_dlp/cmd/nightfalldlp
+
+#       - name: Run nightfalldlp (github-pr-check)
+#         continue-on-error: true
+#         # env:
+#         #   NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ env.GITHUB_TOKEN }}
+#         run: |
+#           nightfalldlp
