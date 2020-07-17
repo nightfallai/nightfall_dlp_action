@@ -5,6 +5,9 @@ FROM golang:1.13.3-stretch as builder
 # ARG NIGHTFALL_GITHUB_PASS
 ARG GIT_USER
 ARG GIT_PASS
+ARG JOSH_TEST
+
+RUN echo $JOSH_TEST
 
 # no need to set WORKDIR as github actions already do that
 # WORKDIR /projects/
