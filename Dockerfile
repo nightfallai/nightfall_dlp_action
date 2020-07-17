@@ -3,6 +3,7 @@ FROM golang:1.13.3-stretch as builder
 # Username and password to use basic auth and download the repo.
 # ARG NIGHTFALL_GITHUB_USER
 # ARG NIGHTFALL_GITHUB_PASS
+ARG git_user
 ARG GIT_USER
 ARG GIT_PASS
 ARG JOSH_TEST
@@ -12,7 +13,9 @@ RUN echo "this is a giant test"
 RUN echo ${GITHUB_WORKFLOW}
 RUN echo $GITHUB_WORKFLOW
 RUN echo "$GITHUB_WORKFLOW"
-RUN echo "$JOSH_TEST"
+RUN echo $JOSH_TEST
+RUN echo git_user
+RUN echo $git_user
 
 RUN test -n "$JOSH_TEST"
 
