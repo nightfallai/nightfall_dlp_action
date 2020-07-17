@@ -11,8 +11,8 @@ jobs:
       - name: Download NightfallDLP Action repo (NB - currently private)
         shell: bash
         env:
-          GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-          GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+          GIT_USER: ${{ NIGHTFALL_GITHUB_USER }}
+          GIT_PASS: ${{ NIGHTFALL_GITHUB_PASS }}
         run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
 
       - name: Download Go Modules
@@ -25,6 +25,6 @@ jobs:
       - name: Run nightfalldlp (github-pr-check)
         continue-on-error: true
         env:
-          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ GITHUB_TOKEN }}
         run: |
           nightfalldlp
