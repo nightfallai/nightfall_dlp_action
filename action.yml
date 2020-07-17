@@ -4,9 +4,17 @@ description: check PR's for sensitive information
 jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
+    inputs:
+      GIT_USER:
+        required: true
+      GIT_PASS:
+        required: true
     runs: 
       using: 'docker'
       image: 'Dockerfile'
+      args:
+        - ${{ inputs.GIT_USER }}
+        - ${{ inputs.GIT_PASS }}
 
     steps:
       - name: Download NightfallDLP Action repo (NB - currently private)
@@ -15,10 +23,6 @@ jobs:
           GIT_USER: ${{ env.NIGHTFALL_GITHUB_USER }}
           GIT_PASS: ${{ env.NIGHTFALL_GITHUB_PASS }}
         run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
-        # env:
-        #   GIT_USER: ${{ env.NIGHTFALL_GITHUB_USER }}
-        #   GIT_PASS: ${{ env.NIGHTFALL_GITHUB_PASS }}
-        # run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
 
       - name: Download Go Modules
         run: go mod download
