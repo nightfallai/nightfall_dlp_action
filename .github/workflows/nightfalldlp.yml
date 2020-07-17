@@ -5,6 +5,10 @@ jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
     runs-on: ubuntu-latest
+    env:
+        GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+        GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+        NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       # - name: Install go
       #   uses: actions/setup-go@v1
@@ -30,9 +34,9 @@ jobs:
 
       - name: Update git url (since has private dependency)
         shell: bash
-        env:
-          GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-          GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+        # env:
+        #   GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+        #   GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
         run: |
           git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
 
