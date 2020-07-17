@@ -14,7 +14,6 @@ RUN echo ${GITHUB_WORKFLOW}
 RUN echo $GITHUB_WORKFLOW
 RUN echo "$GITHUB_WORKFLOW"
 RUN echo $JOSH_TEST
-RUN echo git_user
 RUN echo $git_user
 
 RUN test -n "$JOSH_TEST"

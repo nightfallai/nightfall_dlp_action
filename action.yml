@@ -14,9 +14,9 @@ inputs:
 runs: 
   using: 'docker'
   image: 'Dockerfile'
-  # args:
-  #   - ${{ inputs.git_user }}
-  #   - ${{ inputs.git_pass }}
+  args:
+    - ${{ inputs.git_user }}
+    - ${{ inputs.git_pass }}
   env:
     GIT_USER: ${{ inputs.git_user }}
     GIT_PASS: ${{ inputs.git_pass }}
