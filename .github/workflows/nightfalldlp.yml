@@ -5,10 +5,14 @@ jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
     runs-on: ubuntu-latest
-    env:
-        GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-        GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-        NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # env:
+    #     GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+    #     GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+    #     NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    with:
+        git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+        git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+        nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
     steps:
       # - name: Install go
       #   uses: actions/setup-go@v1

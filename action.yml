@@ -1,16 +1,23 @@
 name: nightfalldlp
 description: check PR's for sensitive information
+inputs:
+  git_user:
+    description: git user for stuff
+    required: true
+  git_pass:
+    description: git pass for stuff
+    required: true
 
 jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
-    inputs:
-      git_user:
-        description: git user for stuff
-        required: true
-      git_pass:
-        description: git pass for stuff
-        required: true
+    # inputs:
+    #   git_user:
+    #     description: git user for stuff
+    #     required: true
+    #   git_pass:
+    #     description: git pass for stuff
+    #     required: true
     runs: 
       using: 'docker'
       image: 'Dockerfile'
