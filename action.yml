@@ -7,6 +7,9 @@ inputs:
   git_pass:
     description: git pass for stuff
     required: true
+  github_token:
+    description: github token for stuff
+    required: true
 
 jobs:
   nightfalldlp-pr:
@@ -21,9 +24,13 @@ jobs:
     runs: 
       using: 'docker'
       image: 'Dockerfile'
-      args:
-        - ${{ inputs.git_user }}
-        - ${{ inputs.git_pass }}
+      # args:
+      #   - ${{ inputs.git_user }}
+      #   - ${{ inputs.git_pass }}
+      env:
+        GIT_USER: ${{ inputs.git_user }}
+        GIT_PASS: ${{ inputs.git_pass }}
+        NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
     steps:
       - name: Download NightfallDLP Action repo (NB - currently private)
@@ -42,7 +49,7 @@ jobs:
 
       - name: Run nightfalldlp (github-pr-check)
         continue-on-error: true
-        env:
-          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ env.GITHUB_TOKEN }}
+        # env:
+        #   NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ env.GITHUB_TOKEN }}
         run: |
           nightfalldlp
