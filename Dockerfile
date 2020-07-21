@@ -9,7 +9,7 @@ ARG GIT_PASS
 ARG JOSH_TEST
 ARG just_a_test
 # ARG GITHUB_WORKFLOW
-RUN printenv
+#RUN printenv
 # RUN echo "this is a giant test"
 # RUN echo ${GITHUB_WORKFLOW}
 # RUN echo $GITHUB_WORKFLOW
@@ -24,6 +24,6 @@ RUN echo "$just_a_test"
 # no need to set WORKDIR as github actions already do that
 WORKDIR /projects/
 # Verify username/pass args were passed in
-RUN test -n "$GIT_USER"
-RUN test -n "$GIT_PASS"
-RUN git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
+#RUN test -n "$GIT_USER"
+#RUN test -n "$GIT_PASS"
+#RUN git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
