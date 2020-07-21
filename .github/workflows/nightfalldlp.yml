@@ -54,6 +54,9 @@ jobs:
         run: |
           cd nightfall && go build ./cmd/nightfalldlp -o nightfall_dlp_main -v
 #          cd nightfall && go install "./cmd/nightfalldlp"
+      - name: Stuff
+        shell: bash
+        run: echo $GOPATH && ls $GOPATH/bin
 
       - name: Run nightfalldlp (github-pr-check)
         continue-on-error: true
