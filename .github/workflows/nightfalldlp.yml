@@ -36,9 +36,9 @@ jobs:
         shell: bash
         run: ls && cd nightfall_dlp
 
-      - name: Download Go Modules
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: go mod download
+#      - name: Download Go Modules
+#        if: steps.cache.outputs.cache-hit != 'true'
+#        run: go mod download
 
       - name: Setup nightfalldlp
         run: |
