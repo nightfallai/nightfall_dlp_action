@@ -8,6 +8,7 @@ ARG GIT_USER
 ARG GIT_PASS
 ARG JOSH_TEST
 ARG just_a_test
+ARG DOCKER_TEST
 # ARG GITHUB_WORKFLOW
 #RUN printenv
 # RUN echo "this is a giant test"
@@ -15,7 +16,8 @@ ARG just_a_test
 # RUN echo $GITHUB_WORKFLOW
 # RUN echo "$GITHUB_WORKFLOW"
 RUN echo $JOSH_TEST
-# RUN echo $git_user
+RUN echo $DOCKER_TEST
+RUN echo "$DOCKER_TEST"
 
 # RUN test -n "$JOSH_TEST"
 RUN echo "HELLO THERE ------------"
