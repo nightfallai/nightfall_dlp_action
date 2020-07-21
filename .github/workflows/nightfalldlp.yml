@@ -40,6 +40,11 @@ jobs:
         shell: bash
         run: ls && cd github_action && ls
 
+      - name: Update git url (since has private dependency)
+          shell: bash
+          run: |
+            git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
+
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
