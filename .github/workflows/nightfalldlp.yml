@@ -68,7 +68,7 @@ jobs:
 #        env:
 #          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo $GOPATH && ls $GOPATH/bin && nightfalldlp
+          echo $GOPATH && ls $GOPATH/bin && nightfalldlp GITHUB_TOKEN="sdfs"
 #          ls && pwd && cd nightfall && nightfall_dlp_main
 #          ls && pwd && cd nightfall && nightfalldlp
 #          ls && pwd && nightfalldlp
