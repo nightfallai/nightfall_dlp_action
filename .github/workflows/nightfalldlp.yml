@@ -22,6 +22,10 @@ jobs:
         shell: bash
         run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" nightfall
 
+      - name: Add $GOPATH/bin
+        run: |
+          echo ::add-path::$(go env GOPATH)/bin
+
       # https://github.com/actions/cache/blob/master/examples.md#go---modules
       - name: Cache Go Modules
         id: cache
