@@ -1,5 +1,5 @@
 name: nightfalldlp
-on: [pull_request]
+on: [pull_request, push]
 env:
     nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
     nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
