@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: test
         shell: bash
-        run: git clone "https://${{ GIT_USER }}:${{ GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git"
+        run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git"
 #        run: echo "${{ secrets.GIT_USER }}" && echo "${{ inputs.SOMETHING }}"
 #        with:
 #          - hello: SOMETHING
