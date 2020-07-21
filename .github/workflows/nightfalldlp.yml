@@ -83,9 +83,9 @@ jobs:
         #   GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
 #        run: git clone https://$nf_git_user:$nf_git_pass@github.com/watchtowerai/nightfall_dlp.git
 
-      - name: checkout nightfall_dlp project
-        shell: bash
-        run: ls && cd nightfall_dlp
+#      - name: checkout nightfall_dlp project
+#        shell: bash
+#        run: ls && cd nightfall_dlp
 
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
