@@ -10,16 +10,6 @@ jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
     runs-on: ubuntu-latest
-#    container:
-#      env:
-#        GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-#        GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-#        NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        DOCKER_TEST: THIS_IS_A_DOCKER_TEST
-    # env:
-    #     GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-    #     GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-    #     NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     env:
         nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
         nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
@@ -32,35 +22,6 @@ jobs:
         shell: bash
         run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git"
 
-
-
-#        run: echo "${{ secrets.GIT_USER }}" && echo "${{ inputs.SOMETHING }}"
-#        with:
-#          - hello: SOMETHING
-#        run: echo $some-test && echo ${{ inputs.some-test }}
-#        run: echo ${{ env.GIT_USER }} && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
-#        run: echo ${{ env.GIT_USER }} && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
-#        run: echo ${{ env.GIT_USER }} && echo $GIT_USER && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
-#        with:
-#          some-test: ${{ env.GIT_USER }}
-
-#      - name: Download Nightfall Scanner tool Repo
-#        shell: bash
-#        run: git clone https://${{ GIT_USER }}:${{ GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git
-#        run: echo ${{ env.anotha }} && echo ${{ env.just_a_test }} && echo ${{ env.JOSH_TEST }}
-
-      # - name: Install go
-      #   uses: actions/setup-go@v1
-      #   with:
-      #     go-version: 1.13
-
-      # - name: Add $GOPATH/bin
-      #   run: |
-      #     echo ::add-path::$(go env GOPATH)/bin
-
-      # - name: Download repo (and action since it's currently in a private repo)
-      #   uses: actions/checkout@v2
-
       # https://github.com/actions/cache/blob/master/examples.md#go---modules
       - name: Cache Go Modules
         id: cache
@@ -70,21 +31,6 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-
-    #   - name: Update git url (since has private dependency)
-    #     shell: bash
-        # env:
-        #   GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-        #   GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-        # run: |
-        #   git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
-
-#      - name: Download NightfallDLP Action Repo
-#        shell: bash
-        # env:
-        #   GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-        #   GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-#        run: git clone https://$nf_git_user:$nf_git_pass@github.com/watchtowerai/nightfall_dlp.git
 
 #      - name: checkout nightfall_dlp project
 #        shell: bash
