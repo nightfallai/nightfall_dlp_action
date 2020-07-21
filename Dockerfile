@@ -10,7 +10,7 @@ ARG JOSH_TEST
 ARG just_a_test
 ARG DOCKER_TEST
 # ARG GITHUB_WORKFLOW
-#RUN printenv
+RUN printenv
 # RUN echo "this is a giant test"
 # RUN echo ${GITHUB_WORKFLOW}
 # RUN echo $GITHUB_WORKFLOW
