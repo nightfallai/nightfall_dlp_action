@@ -30,7 +30,8 @@ jobs:
     steps:
       - name: Download Nightfall Scanner tool Repo
         shell: bash
-        run: git clone https://GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
+        run: echo ${{ env.GIT_USER }} && echo $GIT_USER
+#        run: git clone https://GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
 #        run: echo ${{ env.anotha }} && echo ${{ env.just_a_test }} && echo ${{ env.JOSH_TEST }}
 
       # - name: Install go
