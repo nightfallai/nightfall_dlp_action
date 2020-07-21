@@ -10,17 +10,17 @@ jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
     runs-on: ubuntu-latest
-    env:
-        nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-        nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-        nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
-        just_a_test: SOME_TESTY_MAN
-        GIT_USER: ${{ secrets.GIT_USER }}
-        GIT_PASS: ${{ secrets.GIT_PASS }}
+#    env:
+#        nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+#        nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+#        nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
+#        just_a_test: SOME_TESTY_MAN
+#        GIT_USER: ${{ secrets.GIT_USER }}
+#        GIT_PASS: ${{ secrets.GIT_PASS }}
     steps:
-      - name: Download Nightfall Scanner tool Repo1
-        shell: bash
-        run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git"
+#      - name: Download Nightfall Scanner tool Repo1
+#        shell: bash
+#        run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git"
 
       # https://github.com/actions/cache/blob/master/examples.md#go---modules
       - name: Cache Go Modules
