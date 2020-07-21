@@ -32,8 +32,8 @@ jobs:
         shell: bash
 #        run: echo ${{ env.GIT_USER }} && echo $GIT_USER && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
         run: echo ${{ env.GIT_USER }} && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
-        with:
-          some-test: ${{ env.GIT_USER }}
+#        with:
+#          some-test: ${{ env.GIT_USER }}
 
 #      - name: Download Nightfall Scanner tool Repo
 #        shell: bash
