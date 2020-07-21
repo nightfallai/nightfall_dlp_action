@@ -4,8 +4,8 @@ FROM golang:1.13.3-stretch as builder
 # ARG NIGHTFALL_GITHUB_USER
 # ARG NIGHTFALL_GITHUB_PASS
 # ARG git_user
-# ARG GIT_USER
-# ARG GIT_PASS
+ARG GIT_USER
+ARG GIT_PASS
 # ARG JOSH_TEST
 # ARG GITHUB_WORKFLOW
 
@@ -19,8 +19,8 @@ FROM golang:1.13.3-stretch as builder
 # RUN test -n "$JOSH_TEST"
 
 # no need to set WORKDIR as github actions already do that
-# WORKDIR /projects/
+WORKDIR /projects/
 # Verify username/pass args were passed in
-# RUN test -n "$NIGHTFALL_GITHUB_USER"
-# RUN test -n "$NIGHTFALL_GITHUB_PASS"
-# RUN git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
+RUN test -n "$GIT_USER"
+RUN test -n "$GIT_PASS"
+RUN git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
