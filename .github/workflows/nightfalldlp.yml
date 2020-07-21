@@ -52,8 +52,8 @@ jobs:
 
       - name: Setup nightfalldlp
         run: |
-#          cd githubgo build -o nightfall_dlp_main -v
           cd nightfall && go install "./cmd/nightfalldlp"
+#          cd githubgo build -o nightfall_dlp_main -v
 
       - name: Run nightfalldlp (github-pr-check)
         continue-on-error: true
