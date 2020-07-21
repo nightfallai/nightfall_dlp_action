@@ -46,11 +46,11 @@ jobs:
 #          go install ./cmd/nightfalldlp
 
       - name: Run nightfalldlp (github-pr-check)
-         continue-on-error: true
-         env:
-           NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         run: |
-           nightfalldlp
+        continue-on-error: true
+        env:
+          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          nightfalldlp
 #      - name: nightfallDLP action step
 #        uses: nightfallai/nightfall_dlp@test
 #        with:
