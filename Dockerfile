@@ -9,7 +9,7 @@ ARG GIT_PASS
 ARG JOSH_TEST
 ARG just_a_test
 # ARG GITHUB_WORKFLOW
-
+RUN printenv
 # RUN echo "this is a giant test"
 # RUN echo ${GITHUB_WORKFLOW}
 # RUN echo $GITHUB_WORKFLOW
