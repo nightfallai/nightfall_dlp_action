@@ -52,9 +52,9 @@ jobs:
 
       - name: Setup nightfalldlp
         run: |
-          cd nightfall && go install "./cmd/nightfalldlp"
+          ls $GOPATH/bin && echo 11111 && cd nightfall && go install "./cmd/nightfalldlp" && ls $GOPATH/bin && nightfalldlp
 #          cd nightfall && go build ./cmd/nightfalldlp -o nightfall_dlp_main -v
-      
+
 #      - name: Stuff
 #        shell: bash
 #        run: echo $GOPATH && ls $GOPATH/bin
