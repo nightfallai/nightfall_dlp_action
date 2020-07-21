@@ -30,9 +30,10 @@ jobs:
     steps:
       - name: test
         shell: bash
-        run: echo "${{ secrets.GIT_USER }}" && echo "${{ inputs.SOMETHING }}"
-        with:
-          - hello: SOMETHING
+        run: git clone "https://${{ GIT_USER }}:${{ GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git"
+#        run: echo "${{ secrets.GIT_USER }}" && echo "${{ inputs.SOMETHING }}"
+#        with:
+#          - hello: SOMETHING
 #        run: echo $some-test && echo ${{ inputs.some-test }}
 #        run: echo ${{ env.GIT_USER }} && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
 #        run: echo ${{ env.GIT_USER }} && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
