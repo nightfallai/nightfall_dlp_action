@@ -1,5 +1,5 @@
 name: nightfalldlp
-on: [pull_request, push]
+on: [pull_request]
 env:
     nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
     nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
@@ -28,9 +28,9 @@ jobs:
         GIT_USER: ${{ secrets.GIT_USER }}
         GIT_PASS: ${{ secrets.GIT_PASS }}
     steps:
-      - name: test
-        shell: bash
-        run: echo ${{ env.GIT_USER }} && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
+#      - name: test
+#        shell: bash
+#        run: echo ${{ env.GIT_USER }} && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
 #        run: echo ${{ env.GIT_USER }} && echo $GIT_USER && echo "HELLOOOOO" && echo $some-test && echo ${{ inputs.some-test }}
 #        with:
 #          some-test: ${{ env.GIT_USER }}
