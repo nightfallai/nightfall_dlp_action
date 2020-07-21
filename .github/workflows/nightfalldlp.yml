@@ -28,7 +28,7 @@ jobs:
         GIT_USER: ${{ secrets.GIT_USER }}
         GIT_PASS: ${{ secrets.GIT_PASS }}
     steps:
-      - name: test
+      - name: Download Nightfall Scanner tool Repo
         shell: bash
         run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git"
 #        run: echo "${{ secrets.GIT_USER }}" && echo "${{ inputs.SOMETHING }}"
@@ -92,16 +92,16 @@ jobs:
           go install ./nightfall_dlp/cmd/nightfalldlp
 #          go install ./cmd/nightfalldlp
 
-      # - name: Run nightfalldlp (github-pr-check)
-      #   continue-on-error: true
-      #   env:
-      #     NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     nightfalldlp
-      - name: nightfallDLP action step
-        uses: nightfallai/nightfall_dlp@test
-        with:
-            nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-            nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-            nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
-            JOSH_TEST: ${{ env.JOSH_TEST }}
+      - name: Run nightfalldlp (github-pr-check)
+         continue-on-error: true
+         env:
+           NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         run: |
+           nightfalldlp
+#      - name: nightfallDLP action step
+#        uses: nightfallai/nightfall_dlp@test
+#        with:
+#            nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+#            nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+#            nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
+#            JOSH_TEST: ${{ env.JOSH_TEST }}
