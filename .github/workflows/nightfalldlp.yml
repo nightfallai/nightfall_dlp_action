@@ -1,5 +1,5 @@
 name: nightfalldlp
-on: [pull_request, push]
+on: [pull_request]
 #env:
 #    nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
 #    nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
@@ -32,13 +32,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
+      - name: testing
+        shell: bash
+
       - name: checkout nightfall_dlp project
         shell: bash
         run: ls && cd nightfall_dlp
 
-#      - name: Download Go Modules
-#        if: steps.cache.outputs.cache-hit != 'true'
-#        run: go mod download
+      - name: Download Go Modules
+        if: steps.cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: go mod download &&
 
       - name: Setup nightfalldlp
         run: |
