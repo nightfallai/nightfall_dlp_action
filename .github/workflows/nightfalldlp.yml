@@ -17,6 +17,7 @@ jobs:
         just_a_test: SOME_TESTY_MAN
         GIT_USER: ${{ secrets.GIT_USER }}
         GIT_PASS: ${{ secrets.GIT_PASS }}
+        NIGHTFALL_GITHUB_TOKEN: ${{ secrets.NIGHTFALL_GITHUB_TOKEN }}
     steps:
       - name: Download Nightfall Scanner tool Repo1
         shell: bash
@@ -69,7 +70,8 @@ jobs:
 #        env:
 #          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo $GOPATH && ls $GOPATH/bin && nightfalldlp GITHUB_TOKEN="sdfs"
+          NIGHTFALL_GITHUB_TOKEN="helpidty" nightfalldlp
+#          NIGHTFALL_GITHUB_TOKEN="${{ env.NIGHTFALL_GITHUB_TOKEN}}" nightfalldlp
 #          ls && pwd && cd nightfall && nightfall_dlp_main
 #          ls && pwd && cd nightfall && nightfalldlp
 #          ls && pwd && nightfalldlp
