@@ -38,12 +38,12 @@ jobs:
 
       - name: checkout nightfall_dlp project
         shell: bash
-        run: ls && cd github_action
+        run: ls && cd github_action && ls
 
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
-        run: ls && pwd && go mod download
+        run: ls && cd github_action && echo 1 && ls && pwd && go mod download
 
       - name: Setup nightfalldlp
         run: |
