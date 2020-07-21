@@ -10,6 +10,12 @@ jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
     runs-on: ubuntu-latest
+    container:
+      env:
+        GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+        GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+        NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DOCKER_TEST: THIS_IS_A_DOCKER_TEST
     # env:
     #     GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
     #     GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
