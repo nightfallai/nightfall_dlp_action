@@ -34,6 +34,7 @@ jobs:
 
       - name: testing
         shell: bash
+        run: ls
 
       - name: checkout nightfall_dlp project
         shell: bash
