@@ -43,7 +43,7 @@ jobs:
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
-        run: go mod download
+        run: make deps
 
       - name: Setup nightfalldlp
         run: |
