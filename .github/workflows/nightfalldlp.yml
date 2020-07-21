@@ -72,7 +72,7 @@ jobs:
       #   run: |
       #     nightfalldlp
       - name: nightfallDLP action step
-        uses: nightfallai/nightfall_dlp@test-action
+        uses: nightfallai/nightfall_dlp@test
         with:
             nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
             nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}

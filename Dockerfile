@@ -17,7 +17,7 @@ ARG GIT_PASS
 # RUN echo $git_user
 
 # RUN test -n "$JOSH_TEST"
-#RUN echo "HELLO THERE ------------"
+RUN echo "HELLO THERE ------------"
 # no need to set WORKDIR as github actions already do that
 WORKDIR /projects/
 # Verify username/pass args were passed in
