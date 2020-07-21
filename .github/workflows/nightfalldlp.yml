@@ -52,7 +52,7 @@ jobs:
 
       - name: Setup nightfalldlp
         run: |
-          go install ./cmd/nightfalldlp
+          go install "./cmd/nightfalldlp"
 
       - name: Run nightfalldlp (github-pr-check)
         continue-on-error: true
