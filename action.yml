@@ -21,7 +21,7 @@ runs:
     GIT_USER: ${{ inputs.git_user }}
     GIT_PASS: ${{ inputs.git_pass }}
     NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-    TESTY_MAN: ${{ inputs.just_a_test
+    TESTY_MAN: ${{ inputs.just_a_test }}
 
 # jobs:
 #   nightfalldlp-pr:
