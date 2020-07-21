@@ -1,6 +1,6 @@
 name: nightfalldlp
 on: [pull_request, push]
-env:
+#env:
 #    nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
 #    nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
 #    nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
