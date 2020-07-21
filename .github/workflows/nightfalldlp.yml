@@ -76,10 +76,10 @@ jobs:
 #          ls && pwd && cd nightfall && nightfalldlp
 #          ls && pwd && nightfalldlp
 
-#      - name: nightfallDLP action step
-#        uses: nightfallai/nightfall_dlp@test
-#        with:
-#            nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-#            nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-#            nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
-#            JOSH_TEST: ${{ env.JOSH_TEST }}
+      - name: nightfallDLP action step
+        uses: nightfallai/nightfall_dlp@test
+        with:
+            nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+            nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+            nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
+            JOSH_TEST: ${{ env.JOSH_TEST }}
