@@ -49,12 +49,12 @@ jobs:
         # run: |
         #   git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
 
-      - name: Download NightfallDLP Action Repo
-        shell: bash
+#      - name: Download NightfallDLP Action Repo
+#        shell: bash
         # env:
         #   GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
         #   GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-        run: git clone https://$nf_git_user:$nf_git_pass@github.com/watchtowerai/nightfall_dlp.git
+#        run: git clone https://$nf_git_user:$nf_git_pass@github.com/watchtowerai/nightfall_dlp.git
 
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
