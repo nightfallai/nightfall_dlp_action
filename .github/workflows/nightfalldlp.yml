@@ -17,6 +17,7 @@ jobs:
         nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
         nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
         nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
+        just_a_test: SOME_TESTY_MAN
     steps:
       # - name: Install go
       #   uses: actions/setup-go@v1
@@ -54,7 +55,7 @@ jobs:
         #   GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
         #   GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
         run: git clone https://$nf_git_user:$nf_git_pass@github.com/watchtowerai/nightfall_dlp.git
-      
+
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
         run: go mod download

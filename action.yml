@@ -11,7 +11,7 @@ inputs:
     description: github token for stuff
     required: true
 
-runs: 
+runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
@@ -21,6 +21,7 @@ runs:
     GIT_USER: ${{ inputs.git_user }}
     GIT_PASS: ${{ inputs.git_pass }}
     NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+    TESTY_MAN: ${{ inputs.just_a_test
 
 # jobs:
 #   nightfalldlp-pr:
@@ -32,7 +33,7 @@ runs:
 #     #   git_pass:
 #     #     description: git pass for stuff
 #     #     required: true
-#     runs: 
+#     runs:
 #       using: 'docker'
 #       image: 'Dockerfile'
 #       # args:
