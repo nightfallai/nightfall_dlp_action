@@ -19,10 +19,14 @@ jobs:
         nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
         nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
         just_a_test: SOME_TESTY_MAN
+        GIT_USER: ${{ secrets.GIT_USER }}
+        GIT_PASS: ${{ secrets.GIT_PASS }}
     steps:
-      - name: testing123
+      - name: Download Nightfall Scanner tool Repo
         shell: bash
-        run: echo ${{ env.anotha }} && echo ${{ env.just_a_test }} && echo ${{ env.JOSH_TEST }}
+        run: git clone https://$nf_git_user:$nf_git_pass@github.com/watchtowerai/nightfall_dlp.git
+#        run: echo ${{ env.anotha }} && echo ${{ env.just_a_test }} && echo ${{ env.JOSH_TEST }}
+
       # - name: Install go
       #   uses: actions/setup-go@v1
       #   with:
@@ -66,7 +70,7 @@ jobs:
 
       - name: Setup nightfalldlp
         run: |
-          go install ./projects/nightfall_dlp/cmd/nightfalldlp
+          go install ./nightfall_dlp/cmd/nightfalldlp
 #          go install ./cmd/nightfalldlp
 
       # - name: Run nightfalldlp (github-pr-check)
