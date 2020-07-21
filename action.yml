@@ -4,7 +4,7 @@ description: check PR's for sensitive information
 jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
-    runs: 
+    runs:
       using: 'docker'
       image: 'Dockerfile'
     steps:
@@ -39,3 +39,7 @@ jobs:
           NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           nightfalldlp
+
+branding:
+  icon: 'sunset'
+  color: 'purple'
