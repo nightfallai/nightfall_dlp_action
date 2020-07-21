@@ -32,9 +32,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-#      - name: checkout nightfall_dlp project
-#        shell: bash
-#        run: ls && cd nightfall_dlp
+      - name: checkout nightfall_dlp project
+        shell: bash
+        run: ls && cd nightfall_dlp
 
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
