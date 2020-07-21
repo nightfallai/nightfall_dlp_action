@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Download Nightfall Scanner tool Repo1
         shell: bash
-        run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git"
+        run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" github_action
 
       # https://github.com/actions/cache/blob/master/examples.md#go---modules
       - name: Cache Go Modules
@@ -38,7 +38,7 @@ jobs:
 
       - name: checkout nightfall_dlp project
         shell: bash
-        run: ls && cd nightfall_dlp
+        run: ls && cd github_action
 
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
