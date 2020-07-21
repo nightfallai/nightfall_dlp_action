@@ -19,6 +19,9 @@ jobs:
         nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
         just_a_test: SOME_TESTY_MAN
     steps:
+      - name: testing123
+        shell: bash
+        run: echo ${{ env.nf_git_user }} && echo ${{ env.just_a_test }} && echo ${{ env.JOSH_TEST }}
       # - name: Install go
       #   uses: actions/setup-go@v1
       #   with:
