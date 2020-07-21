@@ -11,7 +11,8 @@ FROM golang:1.13.3-stretch as builder
 #ARG just_a_test
 #ARG DOCKER_TEST
 RUN printenv
-
+RUN echo "GEEZ PLZ WORK"
+RUN echo $git_user
 # ARG GITHUB_WORKFLOW
 # RUN echo "this is a giant test"
 # RUN echo ${GITHUB_WORKFLOW}
