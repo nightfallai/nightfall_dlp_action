@@ -70,7 +70,7 @@ jobs:
       - name: Run nightfalldlp (github-pr-check)
         continue-on-error: true
         env:
-          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
         run: |
           nightfalldlp
