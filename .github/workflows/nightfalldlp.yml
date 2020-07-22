@@ -21,6 +21,10 @@ jobs:
         run: |
           echo ::add-path::$(go env GOPATH)/bin
 
+      - name: test
+        shell: bash
+        run: pwd && cd scanner
+
       # https://github.com/actions/cache/blob/master/examples.md#go---modules
       - name: Cache Go Modules
         id: cache
@@ -31,15 +35,27 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
+      - name: test 2
+        shell: bash
+        run: pwd
+
       - name: Update git url (since has private dependency)
         shell: bash
         run: |
           git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
 
+      - name: test 3
+        shell: bash
+        run: pwd
+
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
         run: cd scanner && go mod download
+
+      - name: test 4
+        shell: bash
+        run: pwd
 
       - name: Setup nightfalldlp
         run: |
