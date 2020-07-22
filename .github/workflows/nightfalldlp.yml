@@ -28,7 +28,7 @@ jobs:
       - name: Download repo (and action since it's currently in a private repo)
         uses: actions/checkout@v2
 
-      - name: test
+      - name: test a
         shell: bash
         run: pwd && ls && ls .. && cd scanner
 
