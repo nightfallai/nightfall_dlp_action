@@ -5,20 +5,13 @@ jobs:
     name: nightfalldlp on Pull Request
     runs-on: ubuntu-latest
     env:
-#      nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-#      nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-#      nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
       GIT_USER: ${{ secrets.GIT_USER }}
       GIT_PASS: ${{ secrets.GIT_PASS }}
-      NIGHTFALL_GITHUB_TOKEN: ${{ secrets.NIGHTFALL_GITHUB_TOKEN }}
+      NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: test 0
+      - name: Download Nightfall Scanner tool Repo (to parent dir ../scanner)
         shell: bash
-        run: pwd
-
-      - name: Download Nightfall Scanner tool Repo1
-        shell: bash
-        run: pwd && ls && git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" ../scanner && ls .. #&& cd scanner && echo 2 && pwd && ls
+        run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" ../scanner
 
       - name: Add $GOPATH/bin
         run: |
@@ -26,10 +19,6 @@ jobs:
 
       - name: Download repo (and action since it's currently in a private repo)
         uses: actions/checkout@v2
-
-#      - name: test a
-#        shell: bash
-#        run: pwd && ls && echo 111111 && ls .. && cd scanner
 
       # https://github.com/actions/cache/blob/master/examples.md#go---modules
       - name: Cache Go Modules
@@ -41,27 +30,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-#      - name: test 2
-#        shell: bash
-#        run: pwd && ls && echo 22222 && ls ..
-
       - name: Update git url (since has private dependency)
         shell: bash
         run: |
           git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
 
-#      - name: test 3
-#        shell: bash
-#        run: pwd
-
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
         run: cd ../scanner && go mod download
-
-      - name: test 4
-        shell: bash
-        run: pwd
 
       - name: Setup nightfalldlp
         run: |
@@ -70,7 +47,6 @@ jobs:
       - name: Run nightfalldlp (github-pr-check)
         continue-on-error: true
         env:
-          NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
         run: |
           nightfalldlp
