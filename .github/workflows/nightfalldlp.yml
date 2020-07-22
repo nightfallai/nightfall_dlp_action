@@ -30,7 +30,7 @@ jobs:
 
       - name: test
         shell: bash
-        run: pwd && cd scanner
+        run: pwd && ls && ls .. && cd scanner
 
       # https://github.com/actions/cache/blob/master/examples.md#go---modules
       - name: Cache Go Modules
