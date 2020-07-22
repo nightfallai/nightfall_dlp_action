@@ -13,6 +13,10 @@ jobs:
       GIT_PASS: ${{ secrets.GIT_PASS }}
       NIGHTFALL_GITHUB_TOKEN: ${{ secrets.NIGHTFALL_GITHUB_TOKEN }}
     steps:
+      - name: test 0
+        shell: bash
+        run: pwd
+
       - name: Download Nightfall Scanner tool Repo1
         shell: bash
         run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" scanner
