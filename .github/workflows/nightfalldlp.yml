@@ -69,10 +69,11 @@ jobs:
 
       - name: Run nightfalldlp (github-pr-check)
         continue-on-error: true
-        #        env:
-        #          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
         run: |
-          pwd && ls && ls .. && NIGHTFALL_GITHUB_TOKEN="helpidty" nightfalldlp
+          nightfalldlp
 
 #      - name: nightfallDLP action step
 #        uses: nightfallai/nightfall_dlp@test
