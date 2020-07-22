@@ -27,9 +27,9 @@ jobs:
       - name: Download repo (and action since it's currently in a private repo)
         uses: actions/checkout@v2
 
-      - name: test a
-        shell: bash
-        run: pwd && ls && echo 111111 && ls .. && cd scanner
+#      - name: test a
+#        shell: bash
+#        run: pwd && ls && echo 111111 && ls .. && cd scanner
 
       # https://github.com/actions/cache/blob/master/examples.md#go---modules
       - name: Cache Go Modules
@@ -41,18 +41,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: test 2
-        shell: bash
-        run: pwd && ls && echo 22222 && ls ..
+#      - name: test 2
+#        shell: bash
+#        run: pwd && ls && echo 22222 && ls ..
 
       - name: Update git url (since has private dependency)
         shell: bash
         run: |
           git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
 
-      - name: test 3
-        shell: bash
-        run: pwd
+#      - name: test 3
+#        shell: bash
+#        run: pwd
 
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
