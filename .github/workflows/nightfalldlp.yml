@@ -18,7 +18,7 @@ jobs:
 
       - name: Download Nightfall Scanner tool Repo1
         shell: bash
-        run: pwd && ls && git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" scanner && ls && cd scanner && echo 2 && pwd && ls
+        run: pwd && ls && git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" ../scanner && ls .. #&& cd scanner && echo 2 && pwd && ls
 
       - name: Add $GOPATH/bin
         run: |
@@ -57,7 +57,7 @@ jobs:
       - name: Download Go Modules
         if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
-        run: cd scanner && go mod download
+        run: cd ../scanner && go mod download
 
       - name: test 4
         shell: bash
@@ -65,7 +65,7 @@ jobs:
 
       - name: Setup nightfalldlp
         run: |
-          cd scanner && go install "./cmd/nightfalldlp"
+          cd ../scanner && go install "./cmd/nightfalldlp"
 
       - name: Run nightfalldlp (github-pr-check)
         continue-on-error: true
