@@ -19,7 +19,7 @@ jobs:
 
       - name: Download Nightfall Scanner tool Repo1
         shell: bash
-        run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" scanner
+        run: pwd && ls && git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" scanner && ls
 
       - name: Add $GOPATH/bin
         run: |
