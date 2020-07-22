@@ -18,7 +18,7 @@ jobs:
 
       - name: Download Nightfall Scanner tool Repo1
         shell: bash
-        run: pwd && ls && git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" scanner && ls
+        run: pwd && ls && git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" scanner && ls && cd scanner && pwd
 
       - name: Add $GOPATH/bin
         run: |
@@ -29,7 +29,7 @@ jobs:
 
       - name: test a
         shell: bash
-        run: pwd && ls && ls .. && cd scanner
+        run: pwd && ls && echo 1111111 && ls .. && cd scanner
 
       # https://github.com/actions/cache/blob/master/examples.md#go---modules
       - name: Cache Go Modules
@@ -43,7 +43,7 @@ jobs:
 
       - name: test 2
         shell: bash
-        run: pwd
+        run: pwd && ls && echo 22222 && ls ..
 
       - name: Update git url (since has private dependency)
         shell: bash
