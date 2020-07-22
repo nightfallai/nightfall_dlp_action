@@ -1,5 +1,5 @@
 name: nightfalldlp
-on: [pull_request, push]
+on: [pull_request]
 jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
@@ -50,7 +50,7 @@ jobs:
         #        env:
         #          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          NIGHTFALL_GITHUB_TOKEN="helpidty" nightfalldlp
+          pwd && ls && NIGHTFALL_GITHUB_TOKEN="helpidty" nightfalldlp
 
 #      - name: nightfallDLP action step
 #        uses: nightfallai/nightfall_dlp@test
