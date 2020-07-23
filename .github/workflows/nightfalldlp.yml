@@ -36,7 +36,7 @@ jobs:
           git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
 
       - name: Download Go Modules
-        if: steps.cache.outputs.cache-hit != 'true'
+#        if: steps.cache.outputs.cache-hit != 'true'
         shell: bash
         run: cd ../scanner && go mod download
 
