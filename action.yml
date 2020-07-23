@@ -41,5 +41,5 @@ jobs:
           nightfalldlp
 
 branding:
-  icon: 'sunset'
+  icon: 'eye'
   color: 'purple'
