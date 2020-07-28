@@ -15,4 +15,7 @@ RUN pwd && ls
 WORKDIR /projects
 RUN pwd && ls
 RUN git clone https://github.com/nightfallai/nightfall_dlp.git
-RUN go run ./nightfall_dlp/cmd/nightfalldlp/main.go
+RUN go install ./nightfall_dlp/cmd/nightfalldlp
+RUN ./nightfalldlp
+#RUN go -o nightfall_dlp -v ./cmd/nightfalldlp
+#RUN go run ./nightfall_dlp/cmd/nightfalldlp/main.go
