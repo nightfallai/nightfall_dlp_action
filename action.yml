@@ -6,8 +6,7 @@ runs:
   args:
     - ${{ inputs.GITHUB_TOKEN }}
   env:
-    NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-    NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    NIGHTFALL_GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 #jobs:
 #  nightfalldlp-pr:
 #    name: nightfalldlp on Pull Request
