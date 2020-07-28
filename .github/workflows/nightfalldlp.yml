@@ -1,0 +1,18 @@
+name: nightfalldlp
+on: [pull_request]
+jobs:
+  nightfalldlp:
+    name: nightfalldlp
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo Action
+        uses: actions/checkout@v2
+
+      - name: nightfallDLP action step
+        uses: nightfallai/nightfall_dlp_action@CreateAction
+        env:
+          NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
+          SHA: ${{ github.sha }}
+          BASE_REF: ${{ github.base_ref }}
+          EVENT_BEFORE: ${{ github.event.before }}
