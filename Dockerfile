@@ -11,3 +11,7 @@ RUN echo $NIGHTFALL_API_KEY
 # Verify username/pass args were passed in
 #RUN test -n "$NIGHTFALL_GITHUB_USER"
 #RUN test -n "$NIGHTFALL_GITHUB_PASS"
+WORKDIR /projects/
+RUN pwd && ls
+RUN git clone https://github.com/nightfallai/nightfall_dlp.git
+RUN pwd && ls
