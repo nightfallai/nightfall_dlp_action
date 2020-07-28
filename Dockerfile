@@ -15,5 +15,4 @@ RUN pwd && ls
 WORKDIR /projects
 RUN pwd && ls
 RUN git clone https://github.com/nightfallai/nightfall_dlp.git
-RUN pwd && ls ./projects
 RUN go run ./nightfall_dlp/cmd/nightfalldlp/main.go
