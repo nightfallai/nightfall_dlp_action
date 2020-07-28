@@ -1,12 +1,16 @@
 name: nightfalldlp
 description: check PR's for sensitive information
+inputs:
+  NIGHTFALL_GITHUB_TOKEN:
+    description: api key for Nightfall API
+    required: true
 runs:
   using: 'Docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.GITHUB_TOKEN }}
-  env:
-    NIGHTFALL_GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+#  env:
+#    NIGHTFALL_GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 #jobs:
 #  nightfalldlp-pr:
 #    name: nightfalldlp on Pull Request
