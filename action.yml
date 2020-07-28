@@ -1,15 +1,19 @@
+# action.yml
 name: nightfalldlp
 description: check PR's for sensitive information
 inputs:
-  NIGHTFALL_API_KEY:
-    description: api key for Nightfall API
+  who-to-greet:  # id of input
+    description: 'Who to greet'
     required: true
+    default: 'World'
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
 runs:
-  using: 'Docker'
+  using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.NIGHTFALL_API_KEY }}
-
+    - ${{ inputs.who-to-greet }}
 #  env:
 #    NIGHTFALL_GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 #jobs:
