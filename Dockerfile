@@ -14,9 +14,11 @@ RUN echo $NIGHTFALL_API_KEY
 RUN pwd && ls
 WORKDIR /projects
 RUN pwd && ls
-RUN git clone https://github.com/nightfallai/jenkins_test.git ./nightfall_dlp
+RUN git clone https://github.com/nightfallai/jenkins_test.git
+
+WORKDIR /projects/jenkins_test
 RUN go mod download
-RUN go build -o nightfalldlp -v ./nightfall_dlp/cmd/nightfalldlp
+RUN go build -o nightfalldlp -v ./cmd/nightfalldlp
 RUN ./nightfalldlp
 #RUN go -o nightfall_dlp -v ./cmd/nightfalldlp
 #RUN go run ./nightfall_dlp/cmd/nightfalldlp/main.go
