@@ -1,44 +1,51 @@
 name: nightfalldlp
 description: check PR's for sensitive information
-
-jobs:
-  nightfalldlp-pr:
-    name: nightfalldlp on Pull Request
-    runs:
-      using: 'docker'
-      image: 'Dockerfile'
-    steps:
-      - name: Download NightfallDLP Action repo (NB - currently private)
-        shell: bash
-        env:
-          GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-          GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-        run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
-
-      # https://github.com/actions/cache/blob/master/examples.md#go---modules
-      - name: Cache Go Modules
-        id: cache
-        uses: actions/cache@v1
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-
-      - name: Download Go Modules
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: go mod download
-
-      - name: Install nightfalldlp
-        run: |
-          go install ./nightfall_dlp/cmd/nightfalldlp
-
-      - name: Run nightfalldlp (github-pr-check)
-        continue-on-error: true
-        env:
-          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          nightfalldlp
+runs:
+  using: 'Docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.GITHUB_TOKEN }}
+  env:
+    NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+    NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#jobs:
+#  nightfalldlp-pr:
+#    name: nightfalldlp on Pull Request
+#    runs:
+#      using: 'docker'
+#      image: 'Dockerfile'
+#    steps:
+#      - name: Download NightfallDLP Action repo (NB - currently private)
+#        shell: bash
+#        env:
+#          GIT_USER: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+#          GIT_PASS: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+#        run: git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
+#
+#      # https://github.com/actions/cache/blob/master/examples.md#go---modules
+#      - name: Cache Go Modules
+#        id: cache
+#        uses: actions/cache@v1
+#        with:
+#          path: ~/go/pkg/mod
+#          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+#          restore-keys: |
+#            ${{ runner.os }}-go-
+#
+#      - name: Download Go Modules
+#        if: steps.cache.outputs.cache-hit != 'true'
+#        run: go mod download
+#
+#      - name: Install nightfalldlp
+#        run: |
+#          go install ./nightfall_dlp/cmd/nightfalldlp
+#
+#      - name: Run nightfalldlp (github-pr-check)
+#        continue-on-error: true
+#        env:
+#          NIGHTFALLDLP_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          nightfalldlp
 
 branding:
   icon: 'eye'
