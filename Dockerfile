@@ -12,7 +12,8 @@ RUN echo $NIGHTFALL_API_KEY
 #RUN test -n "$NIGHTFALL_GITHUB_USER"
 #RUN test -n "$NIGHTFALL_GITHUB_PASS"
 RUN pwd && ls
-WORKDIR /projects/
+WORKDIR /projects
+RUN pwd && ls
 RUN git clone https://github.com/nightfallai/nightfall_dlp.git projects
 RUN pwd && ls ./projects
 RUN go run ./projects/nightfall_dlp/cmd/nightfalldlp/main.go
