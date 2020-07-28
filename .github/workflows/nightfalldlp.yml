@@ -1,5 +1,5 @@
 name: nightfalldlp
-on: [pull_request,push]
+on: [pull_request]
 jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
