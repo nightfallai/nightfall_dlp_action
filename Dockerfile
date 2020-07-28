@@ -10,15 +10,15 @@ FROM golang:1.13.3-stretch as builder
 #ARG JOSH_TEST
 #ARG just_a_test
 #ARG DOCKER_TEST
-ARG git_user
-ARG JOSH_TEST
-ARG TOMATHY
-
-RUN printenv
-RUN echo "GEEZ PLZ WORK"
-RUN echo $git_user
-RUN echo $JOSH_TEST
-RUN echo $TOMATHY
+#ARG git_user
+#ARG JOSH_TEST
+#ARG TOMATHY
+#
+#RUN printenv
+#RUN echo "GEEZ PLZ WORK"
+#RUN echo $git_user
+#RUN echo $JOSH_TEST
+#RUN echo $TOMATHY
 # ARG GITHUB_WORKFLOW
 # RUN echo "this is a giant test"
 # RUN echo ${GITHUB_WORKFLOW}
@@ -38,4 +38,4 @@ WORKDIR /projects/
 # Verify username/pass args were passed in
 #RUN test -n "$GIT_USER"
 #RUN test -n "$GIT_PASS"
-#RUN git clone https://$GIT_USER:$GIT_PASS@github.com/watchtowerai/nightfall_dlp.git
+RUN git clone https://github.com/nightfallai/nightfall_dlp.git

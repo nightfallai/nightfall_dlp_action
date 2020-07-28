@@ -9,54 +9,55 @@ jobs:
       GIT_PASS: ${{ secrets.GIT_PASS }}
       NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Download Nightfall Scanner tool Repo (to parent dir ../scanner)
-        shell: bash
-        run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" ../scanner
-
-      - name: Add $GOPATH/bin
-        run: |
-          echo ::add-path::$(go env GOPATH)/bin
-
-      - name: Download repo (and action since it's currently in a private repo)
-        uses: actions/checkout@v2
-
-      # https://github.com/actions/cache/blob/master/examples.md#go---modules
-      - name: Cache Go Modules
-        id: cache
-        uses: actions/cache@v1
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-
-      - name: Update git url (since has private dependency)
-        shell: bash
-        run: |
-          git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
-
-      - name: Download Go Modules
-#        if: steps.cache.outputs.cache-hit != 'true'
-        shell: bash
-        run: cd ../scanner && go mod download
-
-      - name: Setup nightfalldlp
-        run: |
-          cd ../scanner && go install "./cmd/nightfalldlp"
-
-      - name: Run nightfalldlp (github-pr-check)
-        continue-on-error: true
-        env:
-          NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
-        run: |
-          nightfalldlp
-
-#      - name: nightfallDLP action step
-#        uses: nightfallai/nightfall_dlp@test
+#      - name: Download Nightfall Scanner tool Repo (to parent dir ../scanner)
+#        shell: bash
+#        run: git clone "https://${{ env.GIT_USER }}:${{ env.GIT_PASS }}@github.com/watchtowerai/nightfall_dlp.git" ../scanner
+#
+#      - name: Add $GOPATH/bin
+#        run: |
+#          echo ::add-path::$(go env GOPATH)/bin
+#
+#      - name: Download repo (and action since it's currently in a private repo)
+#        uses: actions/checkout@v2
+#
+#      # https://github.com/actions/cache/blob/master/examples.md#go---modules
+#      - name: Cache Go Modules
+#        id: cache
+#        uses: actions/cache@v1
 #        with:
-#          nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-#          nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-#          nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
+#          path: ~/go/pkg/mod
+#          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+#          restore-keys: |
+#            ${{ runner.os }}-go-
+#
+#      - name: Update git url (since has private dependency)
+#        shell: bash
+#        run: |
+#          git config --global url."https://$GIT_USER:$GIT_PASS@github.com/".insteadOf "https://github.com/"
+#
+#      - name: Download Go Modules
+##        if: steps.cache.outputs.cache-hit != 'true'
+#        shell: bash
+#        run: cd ../scanner && go mod download
+#
+#      - name: Setup nightfalldlp
+#        run: |
+#          cd ../scanner && go install "./cmd/nightfalldlp"
+#
+#      - name: Run nightfalldlp (github-pr-check)
+#        continue-on-error: true
+#        env:
+#          NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
+#        run: |
+#          nightfalldlp
+
+      - name: nightfallDLP action step
+        uses: nightfallai/nightfall_dlp@test
+        with:
+          nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+          nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+          nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
+          NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
 #          JOSH_TEST: ${{ env.JOSH_TEST }}
 #          TOMATHY: TIMOTHY TOMATHY TIMMINS
 
