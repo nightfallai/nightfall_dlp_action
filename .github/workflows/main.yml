@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: actions/nightfall_dlp_action
+        uses: nightfallai/nightfall_dlp_action
         with:
           who-to-greet: 'test'
       # Use the output from the `hello` step
