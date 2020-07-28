@@ -6,7 +6,7 @@ ARG NIGHTFALL_GITHUB_PASS
 ARG NIGHTFALL_API_KEY
 
 RUN echo $NIGHTFALL_GITHUB_USER
-RUN echo "---------- BREAK ----------
+RUN echo "---------- BREAK ----------"
 RUN echo $NIGHTFALL_API_KEY
 # Verify username/pass args were passed in
 #RUN test -n "$NIGHTFALL_GITHUB_USER"
