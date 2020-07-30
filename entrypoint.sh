@@ -16,5 +16,6 @@ else
   echo "${DIFF_OUTPUT_PUSH}"
   echo "Diff between $3 and $1";
   fi;
+  
 echo "FILE CONTENTS: "
 cat $diff_filename;
