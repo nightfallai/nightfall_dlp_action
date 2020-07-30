@@ -7,6 +7,9 @@ on:
   pull_request:
 
 jobs:
+  - name: Checkout Repo Action
+    uses: actions/checkout@v2
+
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
     runs-on: ubuntu-latest
