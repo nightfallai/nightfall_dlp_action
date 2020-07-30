@@ -1,5 +1,11 @@
 name: nightfalldlp
-on: [push]
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
 jobs:
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
@@ -8,6 +14,7 @@ jobs:
       GIT_USER: ${{ secrets.GIT_USER }}
       GIT_PASS: ${{ secrets.GIT_PASS }}
       NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NIGHTFALL_API_TOKEN: ${{ secrets.NIGHTFALL_API_TOKEN }}
     steps:
       #      - name: Download Nightfall Scanner tool Repo (to parent dir ../scanner)
       #        shell: bash
@@ -52,15 +59,15 @@ jobs:
       #          nightfalldlp
 
       - name: nightfallDLP action step
-        uses: nightfallai/nightfall_dlp_action@CreateAction
+        uses: nightfallai/nightfall_dlp_action@AddGitDiffCommands
         with:
-          nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
-          nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
-          nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
-          NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
-#          JOSH_TEST: ${{ env.JOSH_TEST }}
-#          TOMATHY: TIMOTHY TOMATHY TIMMINS
-
+          SHA: ${{ github.sha }}
+          BASE_REF: ${{ github.base_ref }}
+          EVENT_BEFORE: ${{ github.event.before }}
+          # nf_git_user: ${{ secrets.NIGHTFALL_GITHUB_USER }}
+          # nf_git_pass: ${{ secrets.NIGHTFALL_GITHUB_PASS }}
+          # nightfall_dlp_github_api_token: ${{ secrets.GITHUB_TOKEN }}
+          #NIGHTFALL_API_KEY: ${{ env.NIGHTFALL_API_KEY }}
 
 
 

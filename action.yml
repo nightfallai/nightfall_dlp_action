@@ -1,14 +1,23 @@
 name: nightfalldlp
 description: check PR's for sensitive information
 inputs:
-  NIGHTFALL_API_KEY:
-    description: api key for Nightfall API
+  SHA:
     required: true
+  BASE_REF:
+    required: false
+  EVENT_BEFORE:
+    required: true
+  #NIGHTFALL_API_KEY:
+  #  description: api key for Nightfall API
+  #  required: true
 runs:
   using: 'Docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.NIGHTFALL_API_KEY }}
+    - ${{ inputs.SHA }}
+    - ${{ inputs.BASE_REF }}
+    - ${{ inputs.EVENT_BEFORE }}
+    # - ${{ inputs.NIGHTFALL_API_KEY }}
 #  env:
 #    NIGHTFALL_GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 #jobs:
