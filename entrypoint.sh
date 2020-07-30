@@ -7,7 +7,6 @@ if [ "$BASE_REF" ]; then
   echo "PR: fetching diff between origin/$BASE_REF and $SHA";
   git diff origin/"$BASE_REF" "$SHA" > $diff_filename;
 else
-  echo "DIFF ON PUSH";
   git fetch origin "$EVENT_BEFORE" --depth=1;
   echo "PUSH: fetching diff between $EVENT_BEFORE and $SHA";
   git diff "$EVENT_BEFORE" "$SHA" > $diff_filename;

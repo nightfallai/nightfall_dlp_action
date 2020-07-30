@@ -6,12 +6,13 @@ ARG NIGHTFALL_DLP_RELEASE="v0.0.1"
 WORKDIR /projects
 RUN git clone --branch $NIGHTFALL_DLP_RELEASE https://github.com/nightfallai/jenkins_test.git
 
-# navigate to DLP repo and install it to $GOPATH/bin/nightfalldlp
+# navigate to the nightfalldlp repo and install it to $GOPATH/bin/nightfalldlp
 WORKDIR /projects/jenkins_test
 RUN go mod download
 RUN go install -v ./cmd/nightfalldlp
 
-# mount GOPATH dir so we have access to nightfalldlp executable
+# mount the $GOPATH dir onto our docker container so we have access to the nightfalldlp executable
+# we installed
 VOLUME $GOPATH
 
 # pull in & run our entrypoint shell script
