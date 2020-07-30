@@ -1,18 +1,5 @@
 name: nightfalldlp
 description: check PR's for sensitive information
-inputs:
-  SHA:
-    description: arg 1 - sha for the target branch head.
-    required: true
-  BASE_REF:
-    description: arg 2 - reference for base git branch
-    required: true
-  EVENT_BEFORE:
-    description: arg 3
-    required: true
-  NIGHTFALL_API_KEY:
-    description: arg 4 - api key for Nightfall API
-    required: true
 runs:
   using: 'Docker'
   image: 'Dockerfile'

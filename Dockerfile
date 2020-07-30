@@ -1,10 +1,10 @@
 FROM golang:1.13.3-stretch as builder
 
-ARG nightfall_dlp_release=v0.0.1
+ARG NIGHTFALL_DLP_RELEASE="v0.0.1"
 
 # create /projects and install DLP repo there
 WORKDIR /projects
-RUN git clone --branch $nightfall_dlp_release https://github.com/nightfallai/jenkins_test.git
+RUN git clone --branch $NIGHTFALL_DLP_RELEASE https://github.com/nightfallai/jenkins_test.git
 
 # navigate to DLP repo and install it to $GOPATH/bin/nightfalldlp
 WORKDIR /projects/jenkins_test
