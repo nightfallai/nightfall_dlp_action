@@ -7,9 +7,6 @@ on:
   pull_request:
 
 jobs:
-  - name: Checkout Repo Action
-    uses: actions/checkout@v2
-
   nightfalldlp-pr:
     name: nightfalldlp on Pull Request
     runs-on: ubuntu-latest
@@ -60,6 +57,9 @@ jobs:
       #          NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
       #        run: |
       #          nightfalldlp
+
+      - name: Checkout Repo Action
+        uses: actions/checkout@v2
 
       - name: nightfallDLP action step
         uses: nightfallai/nightfall_dlp_action@AddGitDiffCommands
