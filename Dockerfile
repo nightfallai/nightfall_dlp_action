@@ -1,7 +1,7 @@
 #FROM golang:1.13.3-stretch as builder
 #FROM ubuntu:18.04
 # Container image that runs your code
-FROM golang:1.12-alpine
+FROM golang:1.14-alpine
 
 RUN apk add --no-cache git
 #RUN apt update
