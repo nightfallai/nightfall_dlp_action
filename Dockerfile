@@ -1,9 +1,11 @@
 #FROM golang:1.13.3-stretch as builder
-
+#FROM ubuntu:18.04
 # Container image that runs your code
-FROM ubuntu:18.04
-RUN apt update
-RUN apt install -y git
+FROM golang:1.12-alpine
+
+RUN apk add --no-cache git
+#RUN apt update
+#RUN apt install -y git
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
