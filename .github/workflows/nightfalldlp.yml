@@ -12,11 +12,8 @@ jobs:
       - name: Checkout Repo Action
         uses: actions/checkout@v2
 
-      - name: Echo Github Ref
-        run: echo $GITHUB_REF
-
       - name: nightfallDLP action step
-        uses: "nightfallai/nightfall_dlp_action@$GITHUB_REF"
+        uses: nightfallai/nightfall_dlp_action@FixInitialCommitDiff
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
