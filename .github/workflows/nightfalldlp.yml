@@ -15,8 +15,8 @@ jobs:
       - name: nightfallDLP action step
         uses: nightfallai/nightfall_dlp_action@CreateAction
         env:
-          NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
-          SHA: ${{ github.sha }}
-          BASE_REF: ${{ github.base_ref }}
           EVENT_BEFORE: ${{ github.event.before }}
+#          NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SHA: ${{ github.sha }}
+#          BASE_REF: ${{ github.base_ref }}

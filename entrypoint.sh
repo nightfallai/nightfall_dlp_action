@@ -1,22 +1,15 @@
 #!/bin/sh -l
-echo "SOME THINGS $GITHUB_SHA $GITHUB_RUN_ID $GITHUB_REF"
-echo "$BASE_REF || $GITHUB_REF"
-echo "$SHA || $GITHUB_SHA || $GITHUB_BASE_REF"
-echo $EVENT_BEFORE
+
 # download relevant branch and write the diff to a local file
 diff_filename="./nightfalldlp_raw_diff.txt"
-if [ "$BASE_REF" ]; then
-  git fetch origin "$BASE_REF" --depth=1;
-#  echo "PR: fetching diff between origin/$BASE_REF and $SHA";
-#  git diff origin/"$BASE_REF" "$SHA" > $diff_filename;
-  echo "PR: fetching diff between origin/$GITHUB_BASE_REF and $SHA";
-  git diff origin/"$GITHUB_BASE_REF" "$SHA" > $diff_filename;
-#  echo "PR: fetching diff between origin/$GITHUB_REF and $SHA";
-#  git diff origin/"$GITHUB_REF" "$SHA" > $diff_filename;
+if [ "$GITHUB_BASE_REF" ]; then
+  git fetch origin "$GITHUB_BASE_REF" --depth=1;
+  echo "PR: fetching diff between origin/$GITHUB_BASE_REF and $GITHUB_SHA";
+  git diff origin/"$GITHUB_BASE_REF" "$GITHUB_SHA" > $diff_filename;
 else
   git fetch origin "$EVENT_BEFORE" --depth=1;
-  echo "PUSH: fetching diff between $EVENT_BEFORE and $SHA";
-  git diff "$EVENT_BEFORE" "$SHA" > $diff_filename;
+  echo "PUSH: fetching diff between $EVENT_BEFORE and $GITHUB_SHA";
+  git diff "$EVENT_BEFORE" "$GITHUB_SHA" > $diff_filename;
 fi;
 
 # run nightfalldlp binary
