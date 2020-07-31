@@ -9,8 +9,10 @@ if [ "$BASE_REF" ]; then
   git fetch origin "$BASE_REF" --depth=1;
 #  echo "PR: fetching diff between origin/$BASE_REF and $SHA";
 #  git diff origin/"$BASE_REF" "$SHA" > $diff_filename;
-  echo "PR: fetching diff between origin/$GITHUB_REF and $SHA";
-  git diff origin/"$GITHUB_REF" "$SHA" > $diff_filename;
+  echo "PR: fetching diff between origin/$GITHUB_BASE_REF and $SHA";
+  git diff origin/"$GITHUB_BASE_REF" "$SHA" > $diff_filename;
+#  echo "PR: fetching diff between origin/$GITHUB_REF and $SHA";
+#  git diff origin/"$GITHUB_REF" "$SHA" > $diff_filename;
 else
   git fetch origin "$EVENT_BEFORE" --depth=1;
   echo "PUSH: fetching diff between $EVENT_BEFORE and $SHA";
