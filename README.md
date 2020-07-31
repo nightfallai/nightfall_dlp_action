@@ -8,7 +8,7 @@ security, and ensure you never accidentally leak secrets or other sensitive info
 
 ## Supported CI Services
 ### GithubActions
-How to use the NightfallDLP Github Action inside a Github Workflow
+How to use the NightfallDLP Github Action inside a Github Workflow  
 **N.B.** you _must_ use the actions/checkout step before the running the nightfalldlp action in order for it to function properly.
 )
 ```yaml
@@ -33,7 +33,7 @@ jobs:
           EVENT_BEFORE: ${{ github.event.before }}
 ```
 
-**Configuration**
+**Configuration**  
 NightfallDLP requires a few pieces of configuration to run
 _Config File (detectors)_
     - place a `.nightfalldlp/` directory within the root of your target repository, and inside it a `config.json` file
@@ -48,12 +48,12 @@ ex.
 }
 ```
 
-_Supported Github Events_
+_Supported Github Events_  
 NightfallDLP can run in a Github Workflow triggered by the following events:
 1) PULL_REQUEST
 2) PUSH
 
-_Env Variables_
+_Env Variables_  
 These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow
 1) NIGHTFALL_API_KEY
     - this variable should be added to your target Repository's "Github Secrets" and passed in to your Github Workflow's `env`.
@@ -69,3 +69,5 @@ Detector represent the types of information you want to search for in your code 
 canonical detector names to their likelihoods (link to more info on our API Documentation). The `likelihood` you specify
 per detector serves as a floor in which any findings with likelihoods of equal or greater values will be flagged.
 
+### Versioning
+The NightfallDLP Github Action issues Releases using semantic versioning
