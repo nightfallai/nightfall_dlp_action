@@ -51,7 +51,7 @@ _Config File (detectors)_
 _Env Variables_    
 These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow  
 1) `NIGHTFALL_API_KEY`
-    - get a (FREE) Nightfall API Key by registering an account with the Nightfall API HERE
+    - get a (FREE) Nightfall AI DLP Scan API Key by registering an account with the Nightfall API HERE
     - add this variable to your target repository's "Github Secrets" and passed in to your Github Workflow's `env`.
 
 2) `EVENT_BEFORE` (*only required for Github Workflows running on a `push` event)
@@ -62,6 +62,11 @@ These variables should be made available to the nightfall_dlp_action by adding t
 NightfallDLP can run in a Github Workflow triggered by the following events:
 1) PULL_REQUEST
 2) PUSH
+
+## Nightfall AI DLP Scan API
+Nightfall AI’s DLP Scan API allows you to discover, classify, and protect sensitive data across all of your SaaS applications. 
+Nightfall’s mission is to enable you to protect your internal secrets as well as your customers’ sensitive information.
+Learn more
 
 ## Detectors
 Each detector represents a type of information you want to search for in your code scans (e.g. CRYPTOGRAPHIC_KEY). The 
