@@ -1,5 +1,5 @@
 #!/bin/sh -l
-
+echo "SOME THINGS $GITHUB_SHA $GITHUB_RUN_ID $GITHUB_REF"
 # download relevant branch and write the diff to a local file
 diff_filename="./nightfalldlp_raw_diff.txt"
 if [ "$BASE_REF" ]; then
