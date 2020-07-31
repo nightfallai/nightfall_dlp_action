@@ -34,7 +34,7 @@ jobs:
 
 **Configuration**  
 NightfallDLP requires a few pieces of configuration to run  
-_Config File (detectors)_
+_Config File (detectors)_  
     - place a `.nightfalldlp/` directory within the root of your target repository, and inside it a `config.json` file
     in which you can configure your detectors (see `Detectors` section below for more information on Detectors)
 ex.
@@ -55,18 +55,18 @@ NightfallDLP can run in a Github Workflow triggered by the following events:
 _Env Variables_  
 These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow
 1) NIGHTFALL_API_KEY
-    - this variable should be added to your target Repository's "Github Secrets" and passed in to your Github Workflow's `env`.
-    - you can get a (FREE) Nightfall API Key by registering an account with the Nightfall API HERE
+    - get a (FREE) Nightfall API Key by registering an account with the Nightfall API HERE
+    - add this variable to your target repository's "Github Secrets" and passed in to your Github Workflow's `env`.
     
 2) EVENT_BEFORE (*only for running Github Workflows on a `push` event)
-    - you can find the value for this var on the `github` context object in a Workflow -> EVENT_BEFORE should always point to
-    `${{ github.event.before }}` as seen in the example above
+    - the value for this var lives on the `github` context object in a Workflow - EVENT_BEFORE should always point to
+    `${{ github.event.before }}` (as seen in the example above)
     
 
 ## Detectors
-Detector represent the types of information you want to search for in your code scans. The configuration is a map of 
-canonical detector names to their likelihoods (link to more info on our API Documentation). The `likelihood` you specify
-per detector serves as a floor in which any findings with likelihoods of equal or greater values will be flagged.
+Each detector represents a type of information you want to search for in your code scans (e.g. CRYPTOGRAPHIC_KEY). The 
+configuration is a map of canonical detector names to their likelihoods (link to more info on our API Documentation). The 
+`likelihood` you specify per detector serves as a floor in which any findings with likelihoods of equal or greater values will be flagged.
 
 ### Versioning
 The NightfallDLP Github Action issues Releases using semantic versioning
