@@ -70,8 +70,8 @@ configuration is a map of canonical detector names to their likelihoods (link to
 
 ## Nightfall AI DLP Scan API
 Nightfall AI’s DLP Scan API allows you to discover, classify, and protect sensitive data across all of your SaaS applications. 
-Nightfall’s mission is to enable you to protect your internal secrets as well as your customers’ sensitive information.
-Learn more
+Nightfall’s mission is to enable you to protect your internal secrets as well as your customers’ sensitive information.  
+[Request access](https://nightfall.ai/api/)
 
 ## Versioning
 The NightfallDLP Github Action issues Releases using semantic versioning
