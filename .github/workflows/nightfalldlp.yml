@@ -16,7 +16,7 @@ jobs:
         run: echo $GITHUB_HEAD_REF
 
       - name: nightfallDLP action step
-        uses: nightfallai/nightfall_dlp_action@${{ GITHUB_HEAD_REF }}
+        uses: nightfallai/nightfall_dlp_action@${{ github.head_ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
