@@ -17,6 +17,3 @@ jobs:
         env:
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
           EVENT_BEFORE: ${{ github.event.before }}
-#          NIGHTFALL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          SHA: ${{ github.sha }}
-#          BASE_REF: ${{ github.base_ref }}
