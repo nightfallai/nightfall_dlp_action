@@ -8,9 +8,8 @@ security, and ensure you never accidentally leak secrets or other sensitive info
 
 ## Supported CI Services
 ### GithubActions
-How to use the NightfallDLP Github Action inside a Github Workflow  
-**N.B.** you _must_ use the actions/checkout step before the running the nightfalldlp action in order for it to function properly.
-)
+Example using the NightfallDLP Github Action inside a Github Workflow  
+_(*N.B. you must use the actions/checkout step before the running the nightfalldlp action in order for it to function properly)_
 ```yaml
 name: nightfalldlp
 on:
@@ -34,7 +33,7 @@ jobs:
 ```
 
 **Configuration**  
-NightfallDLP requires a few pieces of configuration to run
+NightfallDLP requires a few pieces of configuration to run  
 _Config File (detectors)_
     - place a `.nightfalldlp/` directory within the root of your target repository, and inside it a `config.json` file
     in which you can configure your detectors (see `Detectors` section below for more information on Detectors)
