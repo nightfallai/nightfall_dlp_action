@@ -11,6 +11,7 @@ if [ "$GITHUB_BASE_REF" ]; then
   git diff origin/"$GITHUB_BASE_REF" "$GITHUB_SHA" > $diff_filename;
 else
   if [ "$EVENT_BEFORE" = "0000000000000000000000000000000000000000" ]; then
+    echo "PUSH: fetching diff between HEAD and $GITHUB_SHA";
     git diff "HEAD" "$GITHUB_SHA" > $diff_filename;
   else
     git fetch origin "$EVENT_BEFORE" --depth=1;
