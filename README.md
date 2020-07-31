@@ -63,15 +63,15 @@ NightfallDLP can run in a Github Workflow triggered by the following events:
 1) PULL_REQUEST
 2) PUSH
 
-## Nightfall AI DLP Scan API
-Nightfall AI’s DLP Scan API allows you to discover, classify, and protect sensitive data across all of your SaaS applications. 
-Nightfall’s mission is to enable you to protect your internal secrets as well as your customers’ sensitive information.
-Learn more
-
 ## Detectors
 Each detector represents a type of information you want to search for in your code scans (e.g. CRYPTOGRAPHIC_KEY). The 
 configuration is a map of canonical detector names to their likelihoods (link to more info on our API Documentation). The 
 `likelihood` you specify per detector serves as a floor in which any findings with likelihoods of equal or greater values will be flagged.
 
-### Versioning
+## Nightfall AI DLP Scan API
+Nightfall AI’s DLP Scan API allows you to discover, classify, and protect sensitive data across all of your SaaS applications. 
+Nightfall’s mission is to enable you to protect your internal secrets as well as your customers’ sensitive information.
+Learn more
+
+## Versioning
 The NightfallDLP Github Action issues Releases using semantic versioning
