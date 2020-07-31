@@ -12,6 +12,7 @@ if [ "$GITHUB_BASE_REF" ]; then
 else
   if [ "$EVENT_BEFORE" = "0000000000000000000000000000000000000000" ]; then
     echo "PUSH: fetching diff between HEAD and $GITHUB_SHA";
+    git fetch origin HEAD --depth=1;
     git diff "HEAD" "$GITHUB_SHA" > $diff_filename;
   else
     git fetch origin "$EVENT_BEFORE" --depth=1;
@@ -22,4 +23,3 @@ fi;
 
 # run nightfalldlp binary
 "$GOPATH/bin/nightfalldlp"
-
