@@ -12,9 +12,21 @@ jobs:
       - name: Checkout Repo Action
         uses: actions/checkout@v2
 
+      - name: Echo SHA
+        run: echo ${{ github.sha }}
+
+      - name: Echo base_ref
+        run: echo ${{ github.base_ref }}
+
+      - name: Echo event before
+        run: echo ${{ github.event.before }}
+
       - name: nightfallDLP action step
         uses: nightfallai/nightfall_dlp_action@FixInitialCommitDiff
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
           EVENT_BEFORE: ${{ github.event.before }}
+
+      - name: Echo Diff
+        run: cat "./nightfalldlp_raw_diff.txt"
