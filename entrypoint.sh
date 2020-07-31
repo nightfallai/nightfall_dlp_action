@@ -2,9 +2,6 @@
 
 # download relevant branch and write the diff to a local file
 diff_filename="./nightfalldlp_raw_diff.txt"
-echo "GITHUB_SHA: $GITHUB_SHA";
-echo "BASE_REF: $GITHUB_BASE_REF";
-echo "EVENT_BEFORE: $EVENT_BEFORE";
 if [ "$GITHUB_BASE_REF" ]; then
   git fetch origin "$GITHUB_BASE_REF" --depth=1;
   echo "PR: fetching diff between origin/$GITHUB_BASE_REF and $GITHUB_SHA";
@@ -12,7 +9,6 @@ if [ "$GITHUB_BASE_REF" ]; then
 else
   if [ "$EVENT_BEFORE" = "0000000000000000000000000000000000000000" ]; then
     echo "PUSH: fetching diff of initial commit";
-    echo git show --format="" "$GITHUB_SHA"
     git show --format="" "$GITHUB_SHA" > $diff_filename;
   else
     git fetch origin "$EVENT_BEFORE" --depth=1;
