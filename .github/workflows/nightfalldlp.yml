@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: nightfallDLP action step
-        uses: nightfallai/nightfall_dlp_action@${{ github.event.ref }}
+        uses: nightfallai/nightfall_dlp_action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
