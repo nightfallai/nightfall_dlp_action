@@ -8,21 +8,13 @@ jobs:
   nightfalldlp:
     name: nightfalldlp
     runs-on: ubuntu-latest
-    env:
-      ACTION_VERSION: nightfallai/nightfall_dp_action@${{ github.head_ref }}
     steps:
       - name: Checkout Repo Action
         uses: actions/checkout@v2
 
-      - name: Echo Action Version
-        run: echo $ACTION_ECHO
-        env:
-          ACTION_ECHO: ${{env.ACTION_VERSION}}
-
       - name: nightfallDLP action step
-        uses: $ACTION_V
+        uses: nightfallai/nightfall_dlp_action@FixInitialCommitDiff
         env:
-          ACTION_V: ${{env.ACTION_VERSION}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
           EVENT_BEFORE: ${{ github.event.before }}
