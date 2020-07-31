@@ -12,8 +12,8 @@ if [ "$GITHUB_BASE_REF" ]; then
 else
   if [ "$EVENT_BEFORE" = "0000000000000000000000000000000000000000" ]; then
     echo "PUSH: fetching diff of initial commit";
-    echo git show "$GITHUB_SHA"
-    git show "$GITHUB_SHA" > $diff_filename;
+    echo git show --format="" "$GITHUB_SHA"
+    git show --format="" "$GITHUB_SHA" > $diff_filename;
   else
     git fetch origin "$EVENT_BEFORE" --depth=1;
     echo "PUSH: fetching diff between $EVENT_BEFORE and $GITHUB_SHA";
