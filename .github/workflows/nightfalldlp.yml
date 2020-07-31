@@ -6,16 +6,17 @@ on:
   pull_request:
 jobs:
   nightfalldlp:
-    env:
-      action_version: nightfallai/nightfall_dlp_action/${{ github.event.ref }}
     name: nightfalldlp
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo Action
         uses: actions/checkout@v2
 
+      - name: Set Action Ref
+        run: echo "::set-env name=action_ref::$GITHUB_REF"
+
       - name: nightfallDLP action step
-        uses: ${{ action_version }}
+        uses: nightfallai/nightfall_dlp_action@${{ env.action_ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
