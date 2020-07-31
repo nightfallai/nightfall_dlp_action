@@ -16,6 +16,7 @@ else
     git fetch origin "$EVENT_BEFORE" --depth=1;
     echo "PUSH: fetching diff between $EVENT_BEFORE and $GITHUB_SHA";
     git diff "$EVENT_BEFORE" "$GITHUB_SHA" > $diff_filename;
+  fi;
 fi;
 
 # run nightfalldlp binary
