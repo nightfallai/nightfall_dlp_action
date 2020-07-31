@@ -49,14 +49,14 @@ _Config File (detectors)_
 }
 ```
 _Env Variables_    
-These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow
-    1) `NIGHTFALL_API_KEY`
-        - get a (FREE) Nightfall API Key by registering an account with the Nightfall API HERE
-        - add this variable to your target repository's "Github Secrets" and passed in to your Github Workflow's `env`.
-    
-    2) `EVENT_BEFORE` (*only required for Github Workflows running on a `push` event)
-        - the value for this var lives on the `github` context object in a Workflow - EVENT_BEFORE should always point to
-        `${{ github.event.before }}` (as seen in the example above)
+These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow  
+1) `NIGHTFALL_API_KEY`
+    - get a (FREE) Nightfall API Key by registering an account with the Nightfall API HERE
+    - add this variable to your target repository's "Github Secrets" and passed in to your Github Workflow's `env`.
+
+2) `EVENT_BEFORE` (*only required for Github Workflows running on a `push` event)
+    - the value for this var lives on the `github` context object in a Workflow - EVENT_BEFORE should always point to
+    `${{ github.event.before }}` (as seen in the example above)
     
 **Supported Github Events**  
 NightfallDLP can run in a Github Workflow triggered by the following events:
