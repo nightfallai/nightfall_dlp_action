@@ -15,6 +15,9 @@ jobs:
       - name: Echo SHA
         run: echo ${{ github.sha }}
 
+      - name: Echo PR Head SHA
+        run: echo ${{ github.event.pull_request.head.sha }}
+
       - name: Echo base_ref
         run: echo ${{ github.base_ref }}
 
