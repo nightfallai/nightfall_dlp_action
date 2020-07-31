@@ -15,11 +15,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Echo Action Version
-        run: echo ${{ ACTION_VERSION }}
-
-      - name: nightfallDLP action step
-        uses: ${{ ACTION_VERSION }}
+        run: echo $ACTION_V
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
-          EVENT_BEFORE: ${{ github.event.before }}
+          ACTION_V: ${{env.ACTION_VERSION}}
+
+
+      #- name: nightfallDLP action step
+      #  uses: ${{ ACTION_VERSION }}
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
+      #    EVENT_BEFORE: ${{ github.event.before }}
