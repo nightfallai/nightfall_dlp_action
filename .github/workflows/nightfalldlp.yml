@@ -15,5 +15,6 @@ jobs:
       - name: nightfallDLP action step
         uses: nightfallai/nightfall_dlp_action@CreateAction
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
           EVENT_BEFORE: ${{ github.event.before }}
