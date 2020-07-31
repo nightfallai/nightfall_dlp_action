@@ -12,12 +12,18 @@ jobs:
       - name: Checkout Repo Action
         uses: actions/checkout@v2
 
+      - name: Echo Github Ref
+        run: echo $GITHUB_REF
+
       - name: Set Action Ref
         run: echo "::set-env name=action_ref::$GITHUB_REF"
 
-      - name: nightfallDLP action step
-        uses: nightfallai/nightfall_dlp_action@${{ env.action_ref }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
-          EVENT_BEFORE: ${{ github.event.before }}
+      #- name: nightfallDLP action step
+      #  uses: nightfallai/nightfall_dlp_action@${{ env.action_ref }}
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
+      #    EVENT_BEFORE: ${{ github.event.before }}
+
+      - name: Echo Env Var
+        run: echo ${{ env.action_ref}}
