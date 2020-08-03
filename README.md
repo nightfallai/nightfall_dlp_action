@@ -63,6 +63,8 @@ NightfallDLP can run in a Github Workflow triggered by the following events:
 1) PULL_REQUEST
 2) PUSH
 
+NightfallDLP is currently unable to be used in forked Github repositories due to Github's disabling of secrets sharing when Workflows originate from forks.
+
 ## Detectors
 Each detector represents a type of information you want to search for in your code scans (e.g. CRYPTOGRAPHIC_KEY). The 
 configuration is a map of canonical detector names to their likelihoods (link to more info on our API Documentation). The 
