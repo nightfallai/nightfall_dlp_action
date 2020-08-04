@@ -32,12 +32,13 @@ jobs:
           EVENT_BEFORE: ${{ github.event.before }}
 ```
 
-**Configuration**  
+### Action Spec  
 NightfallDLP requires a config file and a few Environment variables in order to run  
 
-_Config File (detectors)_  
+**Config File (detectors)**  
  - place a `.nightfalldlp/` directory within the root of your target repository, and inside it a `config.json` file
  in which you can configure your detectors (see `Detectors` section below for more information on Detectors)  
+ - inside the `detectors` map the keys are Detector Names and the values are the minimum likelihood for a detector to be triggered 
 
  - sample `.nightfalldlp/config.json` file
 ```json
@@ -48,13 +49,16 @@ _Config File (detectors)_
     }
 }
 ```
-_Env Variables_    
+**Env Variables**      
 These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow  
 1) `NIGHTFALL_API_KEY`
     - get a (FREE) Nightfall AI DLP Scan API Key by registering an account with the Nightfall API HERE
     - add this variable to your target repository's "Github Secrets" and passed in to your Github Workflow's `env`.
+2) `GITHUB_TOKEN`
+    - this is automatically injected by Github inside each Workflow (via the `secrets` context), you just need to set it 
+    to the env key
 
-2) `EVENT_BEFORE` (*only required for Github Workflows running on a `push` event)
+3) `EVENT_BEFORE` (*only required for Github Workflows running on a `push` event)
     - the value for this var lives on the `github` context object in a Workflow - EVENT_BEFORE should always point to
     `${{ github.event.before }}` (as seen in the example above)
     
