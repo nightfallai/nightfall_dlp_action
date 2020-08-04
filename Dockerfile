@@ -1,6 +1,6 @@
 FROM golang:1.13.3-stretch as builder
 
-ARG NIGHTFALL_DLP_RELEASE="v0.0.2"
+ARG NIGHTFALL_DLP_RELEASE="v0.0.3"
 
 # create /projects and install DLP repo there
 WORKDIR /projects
