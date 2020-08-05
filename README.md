@@ -29,6 +29,7 @@ jobs:
         uses: nightfallai/nightfall_dlp_action@CreateAction
         env:
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EVENT_BEFORE: ${{ github.event.before }}
 ```
 
@@ -52,11 +53,13 @@ NightfallDLP requires a config file and a few Environment variables in order to 
 **Env Variables**      
 These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow  
 1) `NIGHTFALL_API_KEY`
-    - get a (FREE) Nightfall AI DLP Scan API Key by registering an account with the Nightfall API HERE
+    - get a (FREE) Nightfall AI DLP Scan API Key by registering an account with the [Nightfall API](https://nightfall.ai/api)
     - add this variable to your target repository's "Github Secrets" and passed in to your Github Workflow's `env`.
+
 2) `GITHUB_TOKEN`
     - this is automatically injected by Github inside each Workflow (via the `secrets` context), you just need to set it 
-    to the env key
+    to the env key. This variable should always point to `secrets.GITHUB_TOKEN`
+    - this token is used to authenticate to Github to write Comments/Annotations to your Pull Requests and Pushes
 
 3) `EVENT_BEFORE` (*only required for Github Workflows running on a `push` event)
     - the value for this var lives on the `github` context object in a Workflow - EVENT_BEFORE should always point to
