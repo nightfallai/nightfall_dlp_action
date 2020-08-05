@@ -1,6 +1,6 @@
 FROM golang:1.13.3-stretch as builder
 
-ARG NIGHTFALL_DLP_RELEASE="v0.0.3"
+ARG NIGHTFALL_DLP_RELEASE="NIGH-69-TokenExclusionRules"
 
 # create /projects and install DLP repo there
 WORKDIR /projects
