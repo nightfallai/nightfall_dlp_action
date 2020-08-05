@@ -39,16 +39,31 @@ NightfallDLP requires a config file and a few Environment variables in order to 
 **Config File (detectors)**  
  - place a `.nightfalldlp/` directory within the root of your target repository, and inside it a `config.json` file
  in which you can configure your detectors (see `Detectors` section below for more information on Detectors)  
- - inside the `detectors` map the keys are Detector Names and the values are the minimum likelihood for a detector to be triggered 
+ - inside the `detectors` map the keys are Detector Names and the *values are the minimum likelihood threshold for a detector 
+  to be triggered _(N.B. minimum thresholds are not currently supported, so if one is specified for a detector - regardless of what it is - we will use `POSSIBLE`)_
 
  - sample `.nightfalldlp/config.json` file
 ```json
 {
-    "detectors": {
-        "CREDIT_CARD_NUMBER": "POSSIBLE",
-        "PHONE_NUMBER": "LIKELY"
-    }
+  "detectors": {
+    "CREDIT_CARD_NUMBER": "POSSIBLE",
+    "PHONE_NUMBER": "POSSIBLE",
+    "API_KEY": "POSSIBLE",
+    "CRYPTOGRAPHIC_KEY": "POSSIBLE",
+    "RANDOMLY_GENERATED_TOKEN": "POSSIBLE",
+    "US_SOCIAL_SECURITY_NUMBER": "POSSIBLE",
+    "AMERICAN_BANKERS_CUSIP_ID": "POSSIBLE",
+    "US_BANK_ROUTING_MICR": "POSSIBLE",
+    "ICD9_CODE": "POSSIBLE",
+    "ICD10_CODE": "POSSIBLE",
+    "US_DRIVERS_LICENSE_NUMBER": "POSSIBLE",
+    "US_PASSPORT": "POSSIBLE",
+    "EMAIL_ADDRESS": "POSSIBLE",
+    "IP_ADDRESS": "POSSIBLE"
+  }
 }
+
+
 ```
 **Env Variables**      
 These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow  
