@@ -2,7 +2,7 @@ name: nightfalldlp
 description: check PR's for sensitive information
 runs:
   using: 'Docker'
-  image: 'docker://nightfallai/nightfall_dlp:24156ced7f5153175c78c77e8563786e3c7cc671'
+  image: 'docker://nightfallai/nightfall_dlp:1088f8f8e7fbab98aaa8b2929b69b700f16044b7'
 branding:
   icon: 'eye'
   color: 'purple'
