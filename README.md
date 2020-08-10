@@ -1,5 +1,5 @@
 # nightfall_dlp
-![nightfalldlp](https://www.finsmes.com/wp-content/uploads/2019/11/Nightfall-AI.png "nightfalldlp")
+![nightfalldlp](https://cdn.nightfall.ai/nightfall-dark-logo-tm.png "nightfalldlp")
 ### NightfallDLP - a code review tool that protects you from committing sensitive information
 
 NightfallDLP scans your commits for secrets or sensitive information and posts review comments to your code hosting 
