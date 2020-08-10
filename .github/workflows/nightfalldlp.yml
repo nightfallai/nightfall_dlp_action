@@ -1,9 +1,5 @@
 name: nightfalldlp
-on:
-  push:
-    branches:
-      - master
-  pull_request:
+on: [push]
 jobs:
   nightfalldlp:
     name: nightfalldlp
