@@ -1,15 +1,12 @@
-# nightfall_dlp
-![nightfalldlp](https://cdn.nightfall.ai/nightfall-dark-logo-tm.png "nightfalldlp")
-### NightfallDLP - a code review tool that protects you from committing sensitive information
+# Nightfall DLP Action
+![nightfalldlp](https://nightfall.ai/wp-content/uploads/2020/08/nightfall-dark-logo-tm-e1597263930794.png)
+## [Nightfall](https://nightfall.ai) DLP Action: A code review tool that protects you from committing sensitive information to your repositories.
 
-NightfallDLP scans your commits for secrets or sensitive information and posts review comments to your code hosting 
-services automatically. It’s intended to be used as a part of your CI to simplify the development process, improve your 
-security, and ensure you never accidentally leak secrets or other sensitive information via an accidental commit.
+The Nightfall DLP Action scans your code commits upon Pull Request for sensitive information - like credentials & secrets, PII, credit card numbers & more - and posts review comments to your code hosting service automatically. The Nightfall DLP Action is intended to be used as a part of your CI to simplify the development process, improve your security, and ensure you never accidentally leak secrets or other sensitive information via an accidental commit.
 
-## Supported CI Services
-### GithubActions
-Example using the NightfallDLP Github Action inside a Github Workflow  
-_(**N.B.** you must use the actions/checkout step before the running the nightfalldlp action in order for it to function properly)_
+## Example
+Here's an example using the Nightfall DLP Github Action inside a Github Workflow:  
+_**Note:** you must use the actions/checkout step as shown below before the running the nightfalldlp action in order for it to function properly_
 ```yaml
 name: nightfalldlp
 on:
@@ -33,17 +30,72 @@ jobs:
           EVENT_BEFORE: ${{ github.event.before }}
 ```
 
-### Action Spec  
-NightfallDLP requires a config file and a few Environment variables in order to run  
+## Usage
+**1. Get a Nightfall API key.**
 
-**Config File (detectors)**  
- - place a `.nightfalldlp/` directory within the root of your target repository, and inside it a `config.json` file
- in which you can configure your detectors (see `Detectors` section below for more information on Detectors)  
- - inside the `detectors` map the keys are Detector Names and the *values are the minimum likelihood threshold for a detector 
-  to be triggered _(N.B. minimum thresholds are not currently supported, so if one is specified for a detector - regardless of what it is - we will use `POSSIBLE`)_
+The Nightfall DLP Action is powered by the Nightfall DLP API. Learn more and request access to a free API key **[here](https://nightfall.ai/api/)**. Alternatively, you can email **[sales@nightfall.ai](mailto:sales@nightfall.ai)** to provision a free account.
 
-**Additional Configuration**
+**2. Set up config file to specify detectors.**
 
+- Place a `.nightfalldlp/` directory within the root of your target repository, and inside it a `config.json` file in which you can configure your detectors (see `Detectors` section below for more information on Detectors)
+- See `Additional Configuration` section for more advanced configuration options
+- Below is a sample `.nightfalldlp/config.json` file:
+
+```json
+{
+  "detectors": [
+    "CREDIT_CARD_NUMBER",
+    "PHONE_NUMBER",
+    "API_KEY",
+    "CRYPTOGRAPHIC_KEY",
+    "RANDOMLY_GENERATED_TOKEN",
+    "US_SOCIAL_SECURITY_NUMBER",
+    "AMERICAN_BANKERS_CUSIP_ID",
+    "US_BANK_ROUTING_MICR",
+    "ICD9_CODE",
+    "ICD10_CODE",
+    "US_DRIVERS_LICENSE_NUMBER",
+    "US_PASSPORT",
+    "EMAIL_ADDRESS",
+    "IP_ADDRESS"
+  ]
+}
+```
+**3. Set up a few environment variables.**     
+These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow:
+
+- `NIGHTFALL_API_KEY`
+    - Get a free Nightfall DLP API Key by registering for an account with the [Nightfall API](https://nightfall.ai/api)
+    - Add this variable to your target repository's "Github Secrets" and passed in to your Github Workflow's `env`.
+
+- `GITHUB_TOKEN`
+    - This is automatically injected by Github inside each Workflow (via the `secrets` context), you just need to set it to the `env` key. This variable should always point to `secrets.GITHUB_TOKEN`
+    - This token is used to authenticate to Github to write Comments/Annotations to your Pull Requests and Pushes
+
+- `EVENT_BEFORE` (*only required for Github Workflows running on a `push` event)
+    - the value for this var lives on the `github` context object in a Workflow - EVENT_BEFORE should always point to `${{ github.event.before }}` (as seen in the example above)
+    
+## Supported GitHub Events
+The Nightfall DLP Action can run in a Github Workflow triggered by the following events:
+
+- `PULL_REQUEST`
+- `PUSH`
+
+The Nightfall DLP Action is currently unable to be used in forked GitHub repositories due to GitHub's disabling of secrets sharing when Workflows originate from forks.
+
+## Detectors
+Each detector represents a type of information you want to search for in your code scans. A few examples of detectors Nightfall supports includes:
+
+- `API_KEY`: A freeform string used for user verification to access online program functions.
+- `CREDIT_CARD_NUMBER`: A 12 to 19 digit number used for payments and other monetary transactions.
+- `CRYPTOGRAPHIC_KEY`: A string of characters used by an encryption algorithm to generate seemingly random tokens.
+- `RANDOMLY_GENERATED_TOKEN`: A pseudo-random string generated by an encryption algorithm. This detector is more general than the API_KEY detector.
+- `US_SOCIAL_SECURITY_NUMBER`: A 9 digit numeric string often used as a unique identification number for United States citizens and residents.
+- Many more.
+
+**Find a full list of supported detectors in the Nightfall API Documentation, after creating your account (per the instructions above).**
+
+## Additional Configuration
 You can add additional fields to your config to ignore tokens and files as well as specify which files to exclusively scan on.
 
 **Token Exclusion**
@@ -68,62 +120,11 @@ Here's an example use case:
 In the example, we are ignoring all file paths with a `tests` subdirectory, and only scanning on `go` and `json` files.
 Note: we are using [gobwas/glob](https://github.com/gobwas/glob) to match file path patterns. Unlike the token regex matching, file paths must be completely matched by the given pattern. e.g. If `tests` is a subdirectory, it will not be matched by `tests/*`, which is only a partial match.
 
- - sample `.nightfalldlp/config.json` file
-```json
-{
-  "detectors": [
-    "CREDIT_CARD_NUMBER",
-    "PHONE_NUMBER",
-    "API_KEY",
-    "CRYPTOGRAPHIC_KEY",
-    "RANDOMLY_GENERATED_TOKEN",
-    "US_SOCIAL_SECURITY_NUMBER",
-    "AMERICAN_BANKERS_CUSIP_ID",
-    "US_BANK_ROUTING_MICR",
-    "ICD9_CODE",
-    "ICD10_CODE",
-    "US_DRIVERS_LICENSE_NUMBER",
-    "US_PASSPORT",
-    "EMAIL_ADDRESS",
-    "IP_ADDRESS"
-  ],
-  "tokenExclusionList": ["NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs", "^127\\."],
-  "fileInclusionList": ["*.go", "*.json"],
-  "fileExclusionList": ["*/tests/*"]
-}
-```
-
-**Env Variables**      
-These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow  
-1) `NIGHTFALL_API_KEY`
-    - get a (FREE) Nightfall AI DLP Scan API Key by registering an account with the [Nightfall API](https://nightfall.ai/api)
-    - add this variable to your target repository's "Github Secrets" and passed in to your Github Workflow's `env`.
-
-2) `GITHUB_TOKEN`
-    - this is automatically injected by Github inside each Workflow (via the `secrets` context), you just need to set it 
-    to the env key. This variable should always point to `secrets.GITHUB_TOKEN`
-    - this token is used to authenticate to Github to write Comments/Annotations to your Pull Requests and Pushes
-
-3) `EVENT_BEFORE` (*only required for Github Workflows running on a `push` event)
-    - the value for this var lives on the `github` context object in a Workflow - EVENT_BEFORE should always point to
-    `${{ github.event.before }}` (as seen in the example above)
-    
-**Supported Github Events**  
-NightfallDLP can run in a Github Workflow triggered by the following events:
-1) PULL_REQUEST
-2) PUSH
-
-NightfallDLP is currently unable to be used in forked Github repositories due to Github's disabling of secrets sharing when Workflows originate from forks.
-
-## Detectors
-Each detector represents a type of information you want to search for in your code scans (e.g. CRYPTOGRAPHIC_KEY). The 
-configuration is a map of canonical detector names to their likelihoods (link to more info on our API Documentation). The 
-`likelihood` you specify per detector serves as a floor in which any findings with likelihoods of equal or greater values will be flagged.
-
-## Nightfall AI DLP Scan API
-Nightfall AI’s DLP Scan API allows you to discover, classify, and protect sensitive data across all of your SaaS applications. 
-Nightfall’s mission is to enable you to protect your internal secrets as well as your customers’ sensitive information.  
-[Request access](https://nightfall.ai/api/)
+## [Nightfall DLP API](https://nightfall.ai/api)
+With the Nightfall API, you can inspect & classify your data, wherever it lives. Programmatically get structured results from Nightfall's deep learning-based detectors for things like credit card numbers, API keys, and more. Scan data easily in your own third-party apps, internal apps, and data silos. Leverage these classifications in your own workflows - for example, saving them to a data warehouse or pushing them to a SIEM. Request access & learn more **[here](https://nightfall.ai/api/)**.
 
 ## Versioning
-The NightfallDLP Github Action issues Releases using semantic versioning
+The Nightfall DLP Action issues releases using semantic versioning.
+
+## Support
+For help, please email us at **[support@nightfall.ai](mailto:support@nightfall.ai)**.
