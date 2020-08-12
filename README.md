@@ -65,6 +65,32 @@ NightfallDLP requires a config file and a few Environment variables in order to 
 
 
 ```
+Additional Configuration
+
+You can add additional fields to your config to ignore tokens and files as well as specify which files to exclusively scan on.
+
+Token Exclusion
+
+To ignore specific tokens, you can add the `tokenExclusionList` field to your config. The `tokenExclusionList` is a list of strings, and it mutes findings that match any of the given regex patterns.
+
+Here's an example use case:
+
+```tokenExclusionList: ["NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs", "^127\\."]```
+
+In the example above, findings with the API token `NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs` as well as local IP addresses starting with `127.` would not be reported. For more information on how we match tokens, take a look at [regexp](https://golang.org/pkg/regexp/).
+
+File Inclusion/Exclusion
+
+To omit files from being scanned, you can add the `fileExclusionList` field to your config. In addition, to only scan on certain files, add the `fileInclusionList` to the config.
+
+Here's an example use case:
+```
+    fileExclusionList: ["*/tests/*"],
+    fileInclusionList: ["*.go", "*.json"]
+```
+In the example, we are ignoring all file paths with a `tests` subdirectory, and only scanning on `go` and `json` files.
+Note: we are using [gobwas/glob](https://github.com/gobwas/glob) to match file path patterns. Unlike the token regex matching, file paths must be completely matched by the given pattern. e.g. If `tests` is a subdirectory, it will not be matched by `tests/*`, which is only a partial match.
+
 **Env Variables**      
 These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow  
 1) `NIGHTFALL_API_KEY`
