@@ -1,6 +1,6 @@
 {
-  "detectors": {
-    "CREDIT_CARD_NUMBER": "POSSIBLE",
-    "PHONE_NUMBER": "POSSIBLE"
-  }
+  "detectors": [
+    "CREDIT_CARD_NUMBER",
+    "PHONE_NUMBER"
+  ]
 }
