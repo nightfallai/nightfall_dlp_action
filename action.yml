@@ -1,5 +1,5 @@
-name: nightfalldlp
-description: check PR's for sensitive information
+name: Nightfall DLP Action
+description: Scan Pull Requests for sensitive information, like credentials & secrets, PII, credit card numbers, and more.
 runs:
   using: 'docker'
   image: 'docker://nightfallai/nightfall_cli:v0.0.3'
