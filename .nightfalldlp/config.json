@@ -1,6 +1,0 @@
-{
-  "detectors": [
-    "CREDIT_CARD_NUMBER",
-    "PHONE_NUMBER"
-  ]
-}
