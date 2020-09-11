@@ -67,6 +67,8 @@ The Nightfall DLP Action is powered by the Nightfall DLP API. Learn more and req
   ]
 }
 ```
+- If a config is not included, a default config consisting of the `API_KEY` and `CRYPTOGRAPHIC_KEY` detectors will be used.
+
 **3. Set up a few environment variables.**     
 These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow:
 
