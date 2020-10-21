@@ -1,6 +1,22 @@
 {
-  "detectors": [
-    "CREDIT_CARD_NUMBER",
-    "PHONE_NUMBER"
+  "conditions": [
+    {
+      "detector": {
+        "detectorType": "NIGHTFALL_DETECTOR",
+        "nightfallDetector": "API_KEY",
+        "displayName": "api key"
+      },
+      "minNumFindings": 1,
+      "minConfidence": "LIKELY"
+    },
+    {
+      "detector": {
+        "detectorType": "NIGHTFALL_DETECTOR",
+        "nightfallDetector": "CRYPTOGRAPHIC_KEY",
+        "displayName": "crypto key"
+      },
+      "minNumFindings": 1,
+      "minConfidence": "LIKELY"
+    }
   ]
 }
