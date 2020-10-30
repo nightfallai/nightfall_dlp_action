@@ -5,7 +5,7 @@
 The Nightfall DLP Action scans your code commits upon Pull Request for sensitive information - like credentials & secrets, PII, credit card numbers & more - and posts review comments to your code hosting service automatically. The Nightfall DLP Action is intended to be used as a part of your CI to simplify the development process, improve your security, and ensure you never accidentally leak secrets or other sensitive information via an accidental commit.
 
 ## Example
-Here's an example of the Nightfall DLP Github Action providing feedback on a Pull Request: 
+Here's an example of the Nightfall DLP GitHub Action providing feedback on a Pull Request: 
 
 ![nightfall-dlp-action-example](https://nightfall.ai/wp-content/uploads/2020/08/nightfall-dlp-action-screenshot.png)
 
@@ -53,17 +53,17 @@ These variables should be made available to the nightfall_dlp_action by adding t
 
 - `NIGHTFALL_API_KEY`
     - Get a free Nightfall DLP API Key by registering for an account with the [Nightfall API](https://nightfall.ai/api)
-    - Add this variable to your target repository's "Github Secrets" and passed in to your Github Workflow's `env`.
+    - Add this variable to your target repository's "GitHub Secrets" and passed in to your GitHub Workflow's `env`.
 
 - `GITHUB_TOKEN`
-    - This is automatically injected by Github inside each Workflow (via the `secrets` context), you just need to set it to the `env` key. This variable should always point to `secrets.GITHUB_TOKEN`
-    - This token is used to authenticate to Github to write Comments/Annotations to your Pull Requests and Pushes
+    - This is automatically injected by GitHub inside each Workflow (via the `secrets` context), you just need to set it to the `env` key. This variable should always point to `secrets.GITHUB_TOKEN`
+    - This token is used to authenticate to GitHub to write Comments/Annotations to your Pull Requests and Pushes
 
-- `EVENT_BEFORE` (*only required for Github Workflows running on a `push` event)
+- `EVENT_BEFORE` (*only required for GitHub Workflows running on a `push` event)
     - the value for this var lives on the `github` context object in a Workflow - EVENT_BEFORE should always point to `${{ github.event.before }}` (as seen in the example above)
     
 ## Supported GitHub Events
-The Nightfall DLP Action can run in a Github Workflow triggered by the following events:
+The Nightfall DLP Action can run in a GitHub Workflow triggered by the following events:
 
 - `PULL_REQUEST`
 - `PUSH`
