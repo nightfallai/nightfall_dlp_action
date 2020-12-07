@@ -43,7 +43,7 @@ The Nightfall DLP Action is powered by the Nightfall DLP API. Learn more and req
 
 **2. Set up config file to specify your condition set.**
 
-- Place a `.nightfalldlp/` directory within the root of your target repository, and inside it a `config.json` file in which you can configure your detectors (see `Detectors` section below for more information on Detectors)
+- Place a `.nightfalldlp/` directory within the root of your target repository, and inside it a `config.json` file in which you can configure your condition sets (see `Nightfalldlp Config File` section below for more information on condition sets)
 - See `Additional Configuration` section for more advanced configuration options
 
 - If a config is not included, a default config consisting of a condition set with the `API_KEY` and `CRYPTOGRAPHIC_KEY` detectors will be used.
