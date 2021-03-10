@@ -2,7 +2,7 @@ name: Nightfall DLP Action
 description: Scan Pull Requests for sensitive information, like credentials & secrets, PII, credit card numbers, and more.
 runs:
   using: 'docker'
-  image: 'docker://nightfallai/nightfall_code_scanner:v1.0.0'
+  image: 'docker://nightfallai/nightfall_code_scanner:WriteCommentsToSpecifiedURL'
 branding:
   icon: 'eye'
   color: 'purple'
