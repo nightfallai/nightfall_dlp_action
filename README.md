@@ -62,7 +62,7 @@ These variables should be made available to the nightfall_dlp_action by adding t
 - `EVENT_BEFORE` (*only required for GitHub Workflows running on a `push` event)
     - the value for this var lives on the `github` context object in a Workflow - EVENT_BEFORE should always point to `${{ github.event.before }}` (as seen in the example above)
     
-- `GITHUB_API_BASE_URL` (*for Enterprise only)
+- `API_BASE_URL` (*for Enterprise only)
     - if you are using Github Enterprise, you must set this variable to your enterprise domain name to connect to the Github API
     
 ## Supported GitHub Events
