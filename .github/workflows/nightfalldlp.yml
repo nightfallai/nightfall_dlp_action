@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout Repo Action
         uses: actions/checkout@v2
-        with:
-          persist-credentials: false
 
       - name: nightfallDLP action step
         uses: nightfallai/nightfall_dlp_action@v1.1.0
