@@ -9,9 +9,6 @@ jobs:
     name: nightfalldlp
     runs-on: ubuntu-latest
     steps:
-      - name: Test PWD
-        run: echo $PATH
-        shell: bash
       - name: Checkout Repo Action
         uses: actions/checkout@v2
 
