@@ -1,5 +1,5 @@
 # Nightfall DLP Action
-![nightfalldlp](https://nightfall.ai/wp-content/uploads/2020/08/nightfall-dark-logo-tm-e1597263930794.png)
+![nightfalldlp](https://s3-us-west-2.amazonaws.com/cdn.nightfall.ai/nightfall-dark-logo-tm.png)
 ## [Nightfall](https://nightfall.ai) DLP Action: A code review tool that protects you from committing sensitive information to your repositories.
 
 The Nightfall DLP Action scans your code commits upon Pull Request for sensitive information - like credentials & secrets, PII, credit card numbers & more - and posts review comments to your code hosting service automatically. The Nightfall DLP Action is intended to be used as a part of your CI to simplify the development process, improve your security, and ensure you never accidentally leak secrets or other sensitive information via an accidental commit.
