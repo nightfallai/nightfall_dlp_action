@@ -5,7 +5,7 @@
 The Nightfall DLP Action scans your code commits upon Pull Request for sensitive information - like credentials & secrets, PII, credit card numbers & more - and posts review comments to your code hosting service automatically. The Nightfall DLP Action is intended to be used as a part of your CI to simplify the development process, improve your security, and ensure you never accidentally leak secrets or other sensitive information via an accidental commit.
 
 ## Example
-Here's an example of the Nightfall DLP GitHub Action providing feedback on a Pull Request: 
+Here's an example of the Nightfall DLP GitHub Action providing feedback on a Pull Request:
 
 ![nightfall-dlp-action-example](https://nightfall.ai/wp-content/uploads/2020/08/nightfall-dlp-action-screenshot.png)
 
@@ -34,6 +34,9 @@ jobs:
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EVENT_BEFORE: ${{ github.event.before }}
+    permissions:
+      checks: write
+      contents: read
 ```
 
 ## Usage
@@ -48,7 +51,7 @@ The Nightfall DLP Action is powered by the Nightfall Developer Platform. Learn m
 
 - If a config is not included, a default config consisting of a condition set with the `API_KEY` and `CRYPTOGRAPHIC_KEY` detectors will be used.
 
-**3. Set up a few environment variables.**     
+**3. Set up a few environment variables.**
 These variables should be made available to the nightfall_dlp_action by adding them to the `env:` key in your workflow:
 
 - `NIGHTFALL_API_KEY`
@@ -61,10 +64,10 @@ These variables should be made available to the nightfall_dlp_action by adding t
 
 - `EVENT_BEFORE` (*only required for GitHub Workflows running on a `push` event)
     - the value for this var lives on the `github` context object in a Workflow - EVENT_BEFORE should always point to `${{ github.event.before }}` (as seen in the example above)
-    
+
 - `BASE_URL` (*for Enterprise only)
     - if you are using Github Enterprise, you must set this variable to your enterprise domain name to connect to the Github API.
-    
+
 ## Supported GitHub Events
 The Nightfall DLP Action can run in a GitHub Workflow triggered by the following events:
 
@@ -120,15 +123,15 @@ A detector is either a pre-built Nightfall detector or custom regex or wordlist 
 
 #### Nightfall Pre-Built Detector
 
-  ```json
-  {
-    "detector": {
-      "detectorType": "NIGHTFALL_DETECTOR",
-      "nightfallDetector": "API_KEY",
-      "displayName": "apiKeyDetector"
-    }
+```json
+{
+  "detector": {
+    "detectorType": "NIGHTFALL_DETECTOR",
+    "nightfallDetector": "API_KEY",
+    "displayName": "apiKeyDetector"
   }
-  ```
+}
+```
 
 - Within `detector` struct
 
@@ -253,7 +256,7 @@ To ignore specific tokens from being flagged universally, you can add the `token
 
 Here's an example use case:
 
-```tokenExclusionList: ["NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs", "^127\\."]```
+`tokenExclusionList: ["NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs", "^127\\."]`
 
 In the example above, findings with the API token `NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs` as well as local IP addresses starting with `127.` would not be reported. For more information on how we match tokens, take a look at [regexp](https://golang.org/pkg/regexp/).
 
