@@ -42,7 +42,7 @@ jobs:
 ## Usage
 **1. Get a Nightfall API key.**
 
-The Nightfall DLP Action is powered by the Nightfall Developer Platform. Learn more and request access to a free API key **[here](https://nightfall.ai/api/)**. Alternatively, you can email **[sales@nightfall.ai](mailto:sales@nightfall.ai)** to provision a free account.
+The Nightfall DLP Action is powered by the Nightfall Developer Platform. With the Nightfall Developer Platform, you can inspect & classify your data, wherever it lives. Nightfall's APIs allow callers to programmatically get structured results from  deep learning-based detectors for data types like credit card numbers, API keys, and more. Scan data easily in your own third-party apps, internal apps, and data silos. Leverage these classifications in your own workflows - for example, saving them to a data warehouse or pushing them to a SIEM. Sign up for a free account **[here](https://app.nightfall.ai/sign-up)**!
 
 **2. Set up config file to specify your condition set.**
 
@@ -287,11 +287,8 @@ Here's an example use case:
 In the example, we are ignoring all file paths with a `tests` subdirectory, and only scanning on `go` and `json` files.
 Note: we are using [gobwas/glob](https://github.com/gobwas/glob) to match file path patterns. Unlike the token regex matching, file paths must be completely matched by the given pattern. e.g. If `tests` is a subdirectory, it will not be matched by `tests/*`, which is only a partial match.
 
-## [Nightfall Developer Platform](https://nightfall.ai/api)
-With the Nightfall Developer Platform, you can inspect & classify your data, wherever it lives. Via REST API, programmatically get structured results from Nightfall's deep learning-based detectors for things like credit card numbers, API keys, and more. Scan data easily in your own third-party apps, internal apps, and data silos. Leverage these classifications in your own workflows - for example, saving them to a data warehouse or pushing them to a SIEM. Get started for free [here](https://app.nightfall.ai/sign-up)!
-
 ## Versioning
-The Nightfall DLP CircleCI Orb issues releases using semantic versioning.
+The Nightfall DLP Action issues releases using semantic versioning.
 
 ## Support
 For help, please email us at **[support@nightfall.ai](mailto:support@nightfall.ai)**.
