@@ -5,7 +5,7 @@
       "detectors": [
         {
           "minNumFindings": 1,
-          "minConfidence": "LIKELY",
+          "minConfidence": "VERY_UNLIKELY",
           "displayName": "api key",
           "detectorType": "NIGHTFALL_DETECTOR",
           "nightfallDetector": "API_KEY"
