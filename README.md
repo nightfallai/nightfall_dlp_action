@@ -78,30 +78,35 @@ The Nightfall DLP Action is currently unable to be used in forked GitHub reposit
 
 ## NightfallDLP Config File
 
-The `.nightfalldlp/config.json` file is used as a centralized config file to control what conditions/detectors to scan with and what content you want to scan for pull requests. It includes the following adjustable fields to fit your needs based on the Nightfall Developer Platform. For additional detail, review the Developer Platform documentation [here](https://toolkit.nightfalldlp.com/docs).
+The `.nightfalldlp/config.json` file is used as a centralized config file to control which detectors to scan with and what content you want to scan for in your pull requests. It includes the following adjustable fields to fit your needs based on the Nightfall Developer Platform. For additional detail, review the Developer Platform documentation [here](https://toolkit.nightfalldlp.com/docs).
 
-### ConditionSetUUID
+### DetectionRuleUUIDs
 
-A Condition Set UUID is a unique identifier of a Condition Set, which can be created via the [Nightfall Console](app.nightfall.ai).
-Once defined, you can simply input the UUID in your config file, e.g.
+A Detection Rule UUID is a unique identifier of a Detection Rule, which can be created via the [Nightfall Console](https://app.nightfall.ai/detection-engine/detection-rules).
+Once defined, you can input a list of up to 10 pre-built detection rules in your config file, e.g.
 
 ```json
-{ "conditionSetUUID": "A0BA0D76-78B4-4E10-B653-32996060316B" }
+{ "detectionRuleUUIDs": ["A0BA0D76-78B4-4E10-B653-32996060316B"] }
 ```
 
-Note: by default, if both `conditionSetUUID` and `conditions` are specified, only the `conditionSetUUID` will be used.
+### Detection Rules
 
-### Conditions
-
-Conditions are a list of conditions specified inline. Each `condition` contains a nested `detector` object as well as two additional parameters: `minNumFindings` and `minConfidence`.
+Detection Rules contain a list of detectors specified inline. A `detectionRule` contains a list of `detector` objects, as well as a `logicalOp` and an optional `name`. The `logicalOp` dictates when the detection rule should surface an alert, depending on whether *all* detectors in the provided list trigger a match, or if *at least one* triggers a match.  Valid values for the `logicalOp` are `ANY` (logical OR), and `ALL` (logical AND).
 
 ```json
 {
-  "conditions": [
+  "detectionRules": [
     {
-      "minNumFindings": 1,
-      "minConfidence": "POSSIBLE",
-      "detector": {}
+      "name": "my rule",
+      "logicalOp": "ANY",
+      "detectors": [
+        {
+          "minNumFindings": 1,
+          "minConfidence": "POSSIBLE",
+          "detectorType": "NIGHTFALL_DETECTOR",
+          "nightfallDetector": "CREDIT_CARD_NUMBER"
+        }
+      ]
     }
   ]
 }
@@ -123,62 +128,69 @@ A detector is either a pre-built Nightfall detector or custom regex or wordlist 
 
 #### Nightfall Pre-Built Detector
 
-```json
-{
-  "detector": {
-    "detectorType": "NIGHTFALL_DETECTOR",
-    "nightfallDetector": "API_KEY",
-    "displayName": "apiKeyDetector"
+  ```json
+  {
+    "detectors": [{
+      "detectorType": "NIGHTFALL_DETECTOR",
+      "nightfallDetector": "API_KEY",
+      "displayName": "apiKeyDetector",
+      "minNumFindings": 1,
+      "minConfidence": "POSSIBLE"
+    }]
   }
-}
-```
+  ```
 
-- Within `detector` struct
+- Within a `detector` struct
 
   - First specify `detectorType` as `NIGHTFALL_DETECTOR`
-  - Pick the Nightfall detector you would like to use from our [Detector Glossary](https://toolkit.nightfalldlp.com/login?back_to=%2Fdocs&dest=https%3A%2F%2Fdeveloper.nightfall.ai%2Freference%23glossary). The Glossary includes a broad set of PII, PHI, PCI, credentials & secrets, and more to choose from. We recommend the following two as a simple starting point:
+  - Choose the Nightfall detector you would like to use from our [Detector Glossary](https://docs.nightfall.ai/docs/detector-glossary). The Glossary includes a broad set of PII, PHI, PCI, credentials & secrets, and more to choose from. We recommend the following three as a simple starting point:
     - `API_KEY`
     - `CRYPTOGRAPHIC_KEY`
+    - `PASSWORD_IN_CODE`
 
   - Set a display name for your detector, as this will be attached on your findings
 
 #### Custom Regex
 
-We also support custom regex as a `detector`, which are defined as followed:
+We also support custom regular expressions as a `detector`, which are defined as follows: 
 
 ```json
 {
-  "detector": {
+  "detectors": [{
     "detectorType": "REGEX",
     "regex": {
       "pattern": "coupon:\\d{4,}",
       "isCaseSensitive": false
     },
-    "displayName": "simpleRegexCouponDetector"
-  }
+    "displayName": "simpleRegexCouponDetector",
+    "minNumFindings": 1,
+    "minConfidence": "POSSIBLE"
+  }]
 }
 ```
 
 #### Custom Word List
 
-Word list detectors look for words you specify in a list. Example below:
+Word List detectors trigger when a string payload contains any of the words you specify in the detector definition. For example:
 
 ```json
 {
-  "detector": {
+  "detectors": [{
     "detectorType": "WORD_LIST",
     "wordList": {
       "values": ["key", "credential"],
       "isCaseSensitive": false
     },
-    "displayName": "simpleWordListKeyDetector"
-  }
+    "displayName": "simpleWordListKeyDetector",
+    "minNumFindings": 1,
+    "minConfidence": "POSSIBLE"
+  }]
 }
 ```
 
 #### Additional Detector Configuration Options
 
-Aside from specifying which detector to use for a condition, you can also specify some additional rules to attach. They are `contextRules` and `exclusionRules`.
+Aside from specifying which detectors to use in your scan, you can also specify some additional rules to attach. They are `contextRules` and `exclusionRules`.
 
 ##### Context Rules
 A context rule evaluates the surrounding context (i.e. preceding and following characters) of a finding and adjusts the finding's confidence if the input context rule pattern exists.
@@ -187,7 +199,7 @@ Example:
 
 ```json
 {
-  "detector": {
+  "detectors": [{
     // ...... other detector fields
     "contextRules": [
       {
@@ -204,24 +216,24 @@ Example:
         }
       }
     ]
-  }
+  }]
 }
 ```
 
-- `regex` field specifies a regex to trigger
-- `proximity` is defined as the number pre|post chars surrounding the finding on which to conduct the search
-- `confidenceAdjustment` is the confidence level to adjust the finding to upon existence of the input context
+- `regex` defines a regular expression to trigger a finding
+- `proximity` is defined as the number preceding and trailing characters surrounding the finding in which to conduct the search
+- `confidenceAdjustment` is the confidence level to adjust the finding to if a match is detected
 
-As an example, say we have the following line of text in a file `my cc number: 4242-4242-4242-4242`, and `4242-4242-4242-4242` is detected as a credit card number with `confidence` of `POSSIBLE`. If we had the context rule above, the confidence level of this finding will be bumped up to `VERY_LIKELY` because the characters preceding the finding, `my cc`, match the regex.
+As an example, say we have the line of text `my cc number: 4242-4242-4242-4242` in a file, and `4242-4242-4242-4242` is detected as a credit card number with a `confidence` of `POSSIBLE`. If we had the context rule above, the confidence level of this finding will be bumped up to `VERY_LIKELY` because the characters preceding the finding, `my cc`, match the regex.
 
 ##### Exclusion Rules
-Exclusion rules on individual conditions are used to mute findings related to that condition's detector.
+Exclusion rules on detectors are used to mute findings according to the defined conditions:
 
 Example:
 
 ```json
 {
-  "detector": {
+  "detectors": [{
     // ...... other detector fields
     "exclusionRules": [
       {
@@ -238,31 +250,34 @@ Example:
         }
       }
     ]
-  }
+  }]
 }
 ```
 
 - `exclusionType` specifies either a `REGEX` or `WORD_LIST`
-- `regex` field specifies a regex to trigger, if you choose to use `REGEX` type
+- `regex` specifies a regular expression that, if matched would trigger exclusion
+- `wordList` specifies a list of key words that, if matched would trigger exclusion
 - `matchType` can be either `PARTIAL` or `FULL` - to be a full match, the entire finding must match the regex pattern or word exactly, whereas findings containing more than just the regex pattern or word are considered partial matches. Example: Suppose we have a finding of "4242-4242" with exclusion regex of `4242`. If you use `PARTIAL`, this finding will be excluded from results, while using `FULL` will not exclude this finding, since the regex only partially matches the finding.
 
 ## Additional Configuration
 
-You can add additional fields to your config to ignore tokens and files from being flagged, as well as specify which files to exclusively scan.
+You can add additional fields to your config file to ignore tokens and files from being flagged, as well as specify which files to exclusively scan.
 
 ### Token Exclusion
 
-To ignore specific tokens from being flagged universally, you can add the `tokenExclusionList` field to your config. The `tokenExclusionList` is a list of strings, and it mutes findings that match any of the given regex patterns.
+To ignore specific tokens from being flagged globally, you can add the `tokenExclusionList` field to your nightfalldlp config. The `tokenExclusionList` is a list of strings, and it mutes findings that match any of the given regex patterns.
 
 Here's an example use case:
 
-`tokenExclusionList: ["NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs", "^127\\."]`
+```
+tokenExclusionList: ["NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs", "^127\\."]
+```
 
 In the example above, findings with the API token `NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs` as well as local IP addresses starting with `127.` would not be reported. For more information on how we match tokens, take a look at [regexp](https://golang.org/pkg/regexp/).
 
 ### File Inclusion & Exclusion
 
-To omit files from being scanned, you can add the `fileExclusionList` field to your config. In addition, to only scan specific files, add the `fileInclusionList` to the config.
+To omit files from being scanned, you can add the `fileExclusionList` field to your nightfalldlp config. In addition, to only scan specific files, add the `fileInclusionList` to the config.
 
 Here's an example use case:
 ```
@@ -273,10 +288,10 @@ In the example, we are ignoring all file paths with a `tests` subdirectory, and 
 Note: we are using [gobwas/glob](https://github.com/gobwas/glob) to match file path patterns. Unlike the token regex matching, file paths must be completely matched by the given pattern. e.g. If `tests` is a subdirectory, it will not be matched by `tests/*`, which is only a partial match.
 
 ## [Nightfall Developer Platform](https://nightfall.ai/api)
-With the Nightfall Developer Platform, you can inspect & classify your data, wherever it lives. Via REST API, programmatically get structured results from Nightfall's deep learning-based detectors for things like credit card numbers, API keys, and more. Scan data easily in your own third-party apps, internal apps, and data silos. Leverage these classifications in your own workflows - for example, saving them to a data warehouse or pushing them to a SIEM. Request access & learn more **[here](https://nightfall.ai/api/)**.
+With the Nightfall Developer Platform, you can inspect & classify your data, wherever it lives. Via REST API, programmatically get structured results from Nightfall's deep learning-based detectors for things like credit card numbers, API keys, and more. Scan data easily in your own third-party apps, internal apps, and data silos. Leverage these classifications in your own workflows - for example, saving them to a data warehouse or pushing them to a SIEM. Get started for free [here](https://app.nightfall.ai/sign-up)!
 
 ## Versioning
-The Nightfall DLP Action issues releases using semantic versioning.
+The Nightfall DLP CircleCI Orb issues releases using semantic versioning.
 
 ## Support
 For help, please email us at **[support@nightfall.ai](mailto:support@nightfall.ai)**.
