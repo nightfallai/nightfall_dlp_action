@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: nightfallDLP action step
-        uses: nightfallai/nightfall_dlp_action@v2.0.2
+        uses: nightfallai/nightfall_dlp_action@v2.1.0
         env:
           NIGHTFALL_API_KEY: ${{ secrets.NIGHTFALL_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -152,7 +152,7 @@ A detector is either a pre-built Nightfall detector or custom regex or wordlist 
 
 #### Custom Regex
 
-We also support custom regular expressions as a `detector`, which are defined as follows: 
+We also support custom regular expressions as a `detector`, which are defined as follows:
 
 ```json
 {
@@ -270,7 +270,7 @@ To ignore specific tokens from being flagged globally, you can add the `tokenExc
 Here's an example use case:
 
 ```
-tokenExclusionList: ["NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs", "^127\\."]
+  "tokenExclusionList": ["NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs", "^127\\."]
 ```
 
 In the example above, findings with the API token `NF-gGpblN9cXW2ENcDBapUNaw3bPZMgcABs` as well as local IP addresses starting with `127.` would not be reported. For more information on how we match tokens, take a look at [regexp](https://golang.org/pkg/regexp/).
@@ -281,11 +281,20 @@ To omit files from being scanned, you can add the `fileExclusionList` field to y
 
 Here's an example use case:
 ```
-    fileExclusionList: ["*/tests/*"],
-    fileInclusionList: ["*.go", "*.json"]
+  "fileExclusionList": ["*/tests/*"],
+  "fileInclusionList": ["*.go", "*.json"]
 ```
 In the example, we are ignoring all file paths with a `tests` subdirectory, and only scanning on `go` and `json` files.
 Note: we are using [gobwas/glob](https://github.com/gobwas/glob) to match file path patterns. Unlike the token regex matching, file paths must be completely matched by the given pattern. e.g. If `tests` is a subdirectory, it will not be matched by `tests/*`, which is only a partial match.
+
+### Annotation Levels:
+
+Annotations can be configured to be `notice`, `warning`, or `failure`, by setting the `annotationLevel` key in the configuration object. The check will only fail if `failure` annotations are written.
+
+For example:
+```
+  "annotationLevel": "warning"
+```
 
 ## Versioning
 The Nightfall DLP Action issues releases using semantic versioning.
