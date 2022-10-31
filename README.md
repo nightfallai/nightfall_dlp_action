@@ -78,7 +78,7 @@ The Nightfall DLP Action is currently unable to be used in forked GitHub reposit
 
 ## NightfallDLP Config File
 
-The `.nightfalldlp/config.json` file is used as a centralized config file to control which detectors to scan with and what content you want to scan for in your pull requests. It includes the following adjustable fields to fit your needs based on the Nightfall Developer Platform. For additional detail, review the Developer Platform documentation [here](https://toolkit.nightfalldlp.com/docs).
+The `.nightfalldlp/config.json` file is used as a centralized config file to control which detectors to scan with and what content you want to scan for in your pull requests. It includes the following adjustable fields to fit your needs based on the Nightfall Developer Platform. For additional detail, review the code scanner documentation [here](https://github.com/nightfallai/nightfall_code_scanner#nightfalldlp-config-file).
 
 ### DetectionRuleUUIDs
 
